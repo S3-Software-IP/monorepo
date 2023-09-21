@@ -14,13 +14,17 @@ export default function Menu() {
             I am ALSO somehow very relevant to the items you are accessing here.
           </div>
         </div>
-        <div className="p-4">
+        <div className="p-4 flex flex-col">
           <button className="flex p-4 mx-auto my-2 bg-blue-600 rounded text-white">
             Retrieve top artists
           </button>
 
           <button className="flex p-4 mx-auto bg-blue-600 rounded text-white">
             Retrieve top songs
+          </button>
+
+          <button className="flex p-4 mx-auto my-2 bg-red-400 rounded text-white">
+            Ik ben rood
           </button>
         </div>
       </div>
