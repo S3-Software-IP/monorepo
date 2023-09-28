@@ -50,6 +50,8 @@ next-env.d.ts
 # next.js
 /.next/
 /out/
+<<<<<<< HEAD
+=======
 /cache
 
 # production
@@ -108,6 +110,7 @@ sketch
 # next.js
 /.next/
 /out/
+>>>>>>> 005f1bf37de56a20297727c145cb044082391c34
 
 # production
 /build
