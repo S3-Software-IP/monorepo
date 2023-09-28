@@ -1,5 +1,5 @@
 import React from "react";
-import SpotifyLoginButton from "@/api/spotify";
+import SpotifyKey from "@/api/spotify";
 
 export default function Menu() {
   return (
@@ -23,7 +23,7 @@ export default function Menu() {
           <button className="flex p-4 mx-auto bg-blue-600 rounded text-white">
             Retrieve top songs
           </button>
-          <SpotifyLoginButton />
+          <SpotifyKey></SpotifyKey>
         </div>
       </div>
     </>

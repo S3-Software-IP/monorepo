@@ -1,36 +1,50 @@
-import React from 'react';
+import { Aclonica } from "next/font/google";
+import React, { useEffect } from "react";
 
-export const authEndpoint = "https://accounts.spotify.com/authorize";
-const redirectUrl = "https://localhost:3000/";
-const clientId = "e840dbeda33e49f2a9d7a4a4a1809401";
-const scopes = [
-  "user-read-currently-playing",
-  "user-read-recently-played",
-  "user-read-playback-state",
-  "user-top-read",
-  "user-modify-playback-state"
-];
+const CLIENT_ID = "e840dbeda33e49f2a9d7a4a4a1809401";
+const SPOTIFY_AUTHORIZE_ENDPOINT = "https://accounts.spotify.com/authorize";
+const REDIRECT_URL_AFTER_LOGIN = "http://localhost:3000";
 
-const loginUrl = `${authEndpoint}?client_id=${clientId}&redirect_uri=${redirectUrl}&scope=${scopes.join("%20")}&response_type=token&show_dialog=true`;
+const SCOPES_DELIMITER = "%20";
+const SCOPES = ["user-read-currently-playing"];
+const SCOPES_URL_PARAM = SCOPES.join(SCOPES_DELIMITER);
 
-function SpotifyLoginButton() {
-  const handleLoginClick = () => {
-    window.location.href = loginUrl;
-  };
 
+
+const GetReturnedParamsFromSpotifyAuth = (hash) => {
+  const stringAfterHashing = hash.substring(1);
+  const paramsInUrl = stringAfterHashing.split("&");
+  const paramsSplitUp = paramsInUrl.reduce((accumulater, currentValue) => {
+    const [key, value] = currentValue.split("=");
+    accumulater[key] = value;
+    return accumulater;
+  }, {});
+
+  return paramsSplitUp;
+};
+
+const SpotifyKey = () => {
+  useEffect(() => {
+    if(window.location.hash) {
+      const 
+      {
+        access_token, 
+        expires_in, 
+        token_type
+      }
+      = GetReturnedParamsFromSpotifyAuth(window.location.hash);
+      console.log({access_token})
+    }
+  });
+  const handleLogin = () =>  {
+    window.location = `${SPOTIFY_AUTHORIZE_ENDPOINT}?client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URL_AFTER_LOGIN}&scopes=${SCOPES_URL_PARAM}&response_type=token&show_dialog=true`
+  }
   return (
-    <button
-      className="flex items-center justify-center p-3 mx-auto my-2 bg-green-500 hover:bg-green-600 rounded-lg text-black shadow-md"
-      onClick={handleLoginClick}
-    >
-      <img
-        src="https://static.vecteezy.com/system/resources/previews/022/100/989/non_2x/spotify-logo-transparent-free-png.png"
-        alt="Spotify Logo"
-        className="w-8 h-8 mr-2"
-      />
-      <span className="text-lg">Login with Spotify</span>
-    </button>
-  );
+    <div className="container">
+      <h1>Test</h1>
+      <button onClick={handleLogin}>Login in to spotify</button>
+    </div>
+  )
 }
 
-export default SpotifyLoginButton;
+export default SpotifyKey
