@@ -1,6 +1,7 @@
 import React from "react";
 import Image from "next/image";
 
+
 const Artist = ({ index, artist, artistCoverURL, artistSpotifyURL }) => {
   return (
     <div className="mb-1 items-center">

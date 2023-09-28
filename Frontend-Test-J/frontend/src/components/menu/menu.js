@@ -1,4 +1,6 @@
 import React from "react";
+import SpotifyLoginButton from "@/api/SpotifyLoginButton";
+import GetTopNumbersButton from "@/api/GetTopNumbers";
 
 export default function Menu() {
   return (
@@ -18,14 +20,11 @@ export default function Menu() {
           <button className="flex p-4 mx-auto my-2 bg-blue-600 rounded text-white">
             Retrieve top artists
           </button>
-
-          <button className="flex p-4 mx-auto bg-blue-600 rounded text-white">
-            Retrieve top songs
-          </button>
-
+          <GetTopNumbersButton></GetTopNumbersButton>
           <button className="flex p-4 mx-auto my-2 bg-red-400 rounded text-white">
             Remove the top 50 songs.
           </button>
+          <SpotifyLoginButton></SpotifyLoginButton>
         </div>
       </div>
     </>
