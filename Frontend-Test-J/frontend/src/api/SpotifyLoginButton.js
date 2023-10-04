@@ -5,6 +5,7 @@ const CLIENT_ID = "e840dbeda33e49f2a9d7a4a4a1809401";
 const SPOTIFY_AUTHORIZE_ENDPOINT = "https://accounts.spotify.com/authorize";
 const SPOTIFY_API_BASE_URL = "https://api.spotify.com/v1";
 const REDIRECT_URL_AFTER_LOGIN = "http://localhost:3000";
+const SPOTIFY_REFRESH_TOKEN_ENDPOINT = "https://accounts.spotify.com/api/token";
 
 const SCOPES_DELIMITER = "%20";
 const SCOPES = ["user-top-read"];
@@ -42,7 +43,7 @@ const SpotifyLoginButton = () => {
     const refreshToken = localStorage.getItem("refreshToken");
 
     try {
-      const response = await axios.post("SPOTIFY_REFRESH_TOKEN_ENDPOINT", {
+      const response = await axios.post(`${SPOTIFY_REFRESH_TOKEN_ENDPOINT}`, {
         grant_type: "refresh_token",
         refresh_token: refreshToken,
       });
@@ -92,21 +93,41 @@ const SpotifyLoginButton = () => {
     }
   };
 
+  const handleFetchUserTop50Tracks = async () => {
+    try {
+      const response = await makeAuthorizedRequest("me/top/tracks?limit=10");
+      const topTracks = response.data;
+      console.log("User's Top 50 Tracks:", topTracks);
+    } catch (error) {
+      console.error("Error fetching top tracks:", error);
+    }
+  };
+  
+
   return (
     <div className="container">
+
       <button
-        className="flex items-center justify-center p-3 mx-auto my-2 bg-green-500 hover:bg-green-600 rounded-lg text-black shadow-md"
+        className="flex p-4 mx-auto my-2 bg-green-600 rounded text-white"
         onClick={handleLogin}
-      >
+      > 
         Login with Spotify
       </button>
 
       <button
-        className="flex items-center justify-center p-3 mx-auto my-2 bg-blue-500 hover:bg-blue-600 rounded-lg text-black shadow-md"
+        className="flex p-4 mx-auto my-2 bg-blue-600 rounded text-white"
         onClick={handleFetchUserData}
         disabled={!accessToken}
       >
         Fetch User Data
+      </button>
+
+      <button
+        className="flex p-4 mx-auto my-2 bg-blue-600 rounded text-white"
+        onClick={handleFetchUserTop50Tracks}
+        disabled={!accessToken}
+      >
+        Fetch top 50 tracks
       </button>
     </div>
   );

@@ -17,14 +17,7 @@ export default function Menu() {
           </div>
         </div>
         <div className="p-4 flex flex-col">
-          <button className="flex p-4 mx-auto my-2 bg-blue-600 rounded text-white">
-            Retrieve top artists
-          </button>
-          <GetTopNumbersButton></GetTopNumbersButton>
-          <button className="flex p-4 mx-auto my-2 bg-red-400 rounded text-white">
-            Remove the top 50 songs.
-          </button>
-          <SpotifyLoginButton></SpotifyLoginButton>
+          <SpotifyLoginButton></SpotifyLoginButton>r
         </div>
       </div>
     </>
