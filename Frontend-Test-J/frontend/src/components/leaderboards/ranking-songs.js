@@ -9,7 +9,7 @@ export default function Top50Songs() {
     const fetchTop50Songs = async () => {
       try {
         const apiData = await getTop50Songs_LongTerm();
-        setSongs(apiData?.items || []);
+        setSongs(apiData);
       } catch (error) {
         console.error("Error fetching top 50 songs:", error);
       }
