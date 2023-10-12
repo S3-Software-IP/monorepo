@@ -9,7 +9,7 @@ export default function GenreRankings() {
     const fetchGenres_artists_longTerm = async () => {
       try {
         const apiData = await getGenres_Artists("long_term");
-        setArtistGenres(apiData || []);
+        setArtistGenres(apiData);
       } catch (error) {
         console.error("Error fetching Spotify data:", error);
       }
@@ -22,7 +22,6 @@ export default function GenreRankings() {
     <>
       <div className="flex flex-col justify-center">
         <div>
-          Artist based
           {artistGenres?.slice(0, 50).map((genre, index) => (
             <div key={index}>
               <Genre index={index + 1} genre={genre} />

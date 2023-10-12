@@ -9,7 +9,7 @@ export default function Top50Artists() {
     const fetch50Artist6Months = async () => {
       try {
         const apiData = await getTop50Artists_LongTerm();
-        setArtists(apiData?.items || []);
+        setArtists(apiData);
       } catch (error) {
         console.error("Error fetching Spotify data:", error);
       }
