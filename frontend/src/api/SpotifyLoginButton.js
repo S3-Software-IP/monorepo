@@ -53,8 +53,7 @@ const SpotifyLoginButton = () => {
       localStorage.setItem("expiresIn", expires_in);
 
       setAccessToken(access_token);
-    } catch (error) {
-    }
+    } catch (error) {}
   };
 
   const makeAuthorizedRequest = async (url) => {
@@ -88,47 +87,28 @@ const SpotifyLoginButton = () => {
 
   const handleFetchUserTop50Tracks = async () => {
     try {
-      const response = await makeAuthorizedRequest('me/top/tracks?limit=10');
+      const response = await makeAuthorizedRequest("me/top/tracks?limit=10");
       const topTracksData = response.items;
       setTopTracks(topTracksData);
     } catch (error) {
-      console.error('Error fetching top tracks:', error);
+      console.error("Error fetching top tracks:", error);
     }
   };
-  
 
   return (
     <div className="container">
-  <ol className="list-decimal pl-5 space-y-2">
-    <li>
-      <button
-        className="flex p-4 bg-green-600 rounded text-white"
-        onClick={handleLogin}
-      >
-        Login with Spotify
-      </button>
-    </li>
-    <li>
-      <button
-        className="flex p-4 bg-blue-600 rounded text-white"
-        onClick={handleFetchUserData}
-        disabled={!accessToken}
-      >
-        Fetch User Data
-      </button>
-    </li>
-    <li>
-      <button
-        className="flex p-4 bg-blue-600 rounded text-white"
-        onClick={handleFetchUserTop50Tracks}
-        disabled={!accessToken}
-      >
-        Fetch top 50 tracks
-      </button>
-    </li>
-  </ol>
-</div>
-
+      <ol className="list-decimal pl-5 space-y-2">
+        <li>
+          <button
+            className="flex p-4 bg-green-600 rounded text-white"
+            onClick={handleLogin}
+          >
+            Login with Spotify
+          </button>
+        </li>
+        <li></li>
+      </ol>
+    </div>
   );
 };
 

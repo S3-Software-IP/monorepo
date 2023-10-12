@@ -17,7 +17,7 @@ export default function Menu() {
           </div>
         </div>
         <div className="p-4 flex flex-col">
-          <SpotifyLoginButton></SpotifyLoginButton>r
+          <SpotifyLoginButton></SpotifyLoginButton>
         </div>
       </div>
     </>

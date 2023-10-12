@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { getTop50Songs_LongTerm } from "@/api/song-service";
-import Song from "../leaderboard-base-components/song.js";
+import Song from "@/components/leaderboard-base-components/song.js";
 
 export default function Top50Songs() {
   const [songs, setSongs] = useState([]);

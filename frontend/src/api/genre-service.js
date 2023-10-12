@@ -37,7 +37,7 @@ export async function getGenres_Artists(time_range) {
       break;
   }
 
-  const mergedGenres = mergeGenres(spotifyData.items);
+  const mergedGenres = mergeGenres(spotifyData);
   const genreArray = Object.entries(mergedGenres);
   const sortedGenres = genreArray.sort((a, b) => b[1] - a[1]);
 
