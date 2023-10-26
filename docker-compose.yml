@@ -22,3 +22,10 @@ services:
       - "8234:80"
     depends_on:
       - mysql-server
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
