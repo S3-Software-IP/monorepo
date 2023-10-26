@@ -1,10 +1,16 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 using System.Net.Http.Headers;
 
 namespace SpottedChartsAPI.Controllers
 {
     public class SpotifyController : Controller
     {
+        public SpotifyController(IConfiguration configuration) 
+        {
+            UserRepository userRepository = new UserRepository(configuration.GetConnectionString("MyMariaDBConnection"));
+        }
+
         public enum TimeRange
         {
             short_term,
@@ -72,19 +78,43 @@ namespace SpottedChartsAPI.Controllers
 
                 if (response.IsSuccessStatusCode)
                 {
-                    string responseBody = await response.Content.ReadAsStringAsync();
-                    var userData = Newtonsoft.Json.JsonConvert.DeserializeObject<UserData>(responseBody);
-
-                    var userName = userData.Name;
-                    var userId = userData.Id;
-
-                    return Ok(new { Name = userName, Id = userId });
+                    string jsonContent = await response.Content.ReadAsStringAsync();
+                    UserData user = JsonConvert.DeserializeObject<UserData>(jsonContent);
+                    return Ok(user);
                 }
+            
                 else
                 {
                     return BadRequest("Failed to retrieve user info.");
                 }
             }
         }
+
+        [HttpPost]
+        [Route("/api/spotify/check")]
+        public async Task GetUser(string bearerToken)
+        {
+            using (var httpClient = new HttpClient())
+            {
+                httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", bearerToken);
+                string endpoint = "https://api.spotify.com/v1/me";
+                HttpResponseMessage response = await httpClient.GetAsync(endpoint);
+
+                if (response.IsSuccessStatusCode)
+                {
+                    string jsonContent = await response.Content.ReadAsStringAsync();
+                    UserData user = JsonConvert.DeserializeObject<UserData>(jsonContent);
+
+                    
+
+                }
+
+                else
+                {
+                    
+                }
+            }
+        }
+
     }
 }
