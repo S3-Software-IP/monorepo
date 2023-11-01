@@ -1,6 +1,6 @@
 ﻿namespace SpottedChartsAPI
 {
-    public class UserData
+    public class User
     {
         public string Id { get; set; }
         public string Display_Name { get; set; }

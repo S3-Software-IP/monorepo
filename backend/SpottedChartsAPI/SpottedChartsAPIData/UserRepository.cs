@@ -1,6 +1,8 @@
-﻿namespace SpottedChartsAPI
+﻿using SpottedChartsAPIDomain;
+
+namespace SpottedChartsAPI
 {
-    public class UserRepository
+    public class UserRepository : IUserRepository
     {
         private string _connectionString;
         public UserRepository(string connectionString) 
@@ -8,7 +10,7 @@
             _connectionString = connectionString;
         }
 
-        public bool CheckIfUserExists(UserData userData)
+        public bool CheckIfUserExists(User userData)
         {
             return false;
         }

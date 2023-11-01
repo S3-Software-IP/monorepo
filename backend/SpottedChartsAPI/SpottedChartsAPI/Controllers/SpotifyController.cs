@@ -1,16 +1,17 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
+using SpottedChartsAPIDomain;
 using System.Net.Http.Headers;
 
 namespace SpottedChartsAPI.Controllers
 {
     public class SpotifyController : Controller
     {
-        private readonly 
+        private readonly UserService _userService;
         public SpotifyController(IConfiguration configuration) 
         {
             var connetionString = configuration.GetConnectionString("") ?? throw new NullReferenceException("forgor connection stringS");
-             = new UserRepository(configuration.GetConnectionString("MyMariaDBConnection"));
+            _userService = new UserService(new UserRepository(connetionString));
         }
 
         public enum TimeRange
@@ -81,7 +82,7 @@ namespace SpottedChartsAPI.Controllers
                 if (response.IsSuccessStatusCode)
                 {
                     string jsonContent = await response.Content.ReadAsStringAsync();
-                    UserData user = JsonConvert.DeserializeObject<UserData>(jsonContent);
+                    User user = JsonConvert.DeserializeObject<User>(jsonContent);
                     return Ok(user);
                 }
             
@@ -105,8 +106,8 @@ namespace SpottedChartsAPI.Controllers
                 if (response.IsSuccessStatusCode)
                 {
                     string jsonContent = await response.Content.ReadAsStringAsync();
-                    UserData user = JsonConvert.DeserializeObject<UserData>(jsonContent);
-                    return Ok(user);
+                    User user = JsonConvert.DeserializeObject<User>(jsonContent);
+                    
                     
 
                 }
