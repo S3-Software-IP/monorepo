@@ -6,9 +6,11 @@ namespace SpottedChartsAPI.Controllers
 {
     public class SpotifyController : Controller
     {
+        private readonly 
         public SpotifyController(IConfiguration configuration) 
         {
-            UserRepository userRepository = new UserRepository(configuration.GetConnectionString("MyMariaDBConnection"));
+            var connetionString = configuration.GetConnectionString("") ?? throw new NullReferenceException("forgor connection stringS");
+             = new UserRepository(configuration.GetConnectionString("MyMariaDBConnection"));
         }
 
         public enum TimeRange
@@ -92,7 +94,7 @@ namespace SpottedChartsAPI.Controllers
 
         [HttpPost]
         [Route("/api/spotify/check")]
-        public async Task GetUser(string bearerToken)
+        public async Task<IActionResult> GetUser(string bearerToken)
         {
             using (var httpClient = new HttpClient())
             {
@@ -104,17 +106,12 @@ namespace SpottedChartsAPI.Controllers
                 {
                     string jsonContent = await response.Content.ReadAsStringAsync();
                     UserData user = JsonConvert.DeserializeObject<UserData>(jsonContent);
-
+                    return Ok(user);
                     
 
-                }
-
-                else
-                {
-                    
                 }
             }
+            return BadRequest("");
         }
-
     }
 }

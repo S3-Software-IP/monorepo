@@ -3,9 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.5.33414.496
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpottedChartsAPI", "SpottedChartsAPI\SpottedChartsAPI.csproj", "{50AB1FAC-E400-4CC4-AD86-73B503CE5A19}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SpottedChartsAPI", "SpottedChartsAPI\SpottedChartsAPI.csproj", "{50AB1FAC-E400-4CC4-AD86-73B503CE5A19}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpottedChartsAPITests", "SpottedChartsAPITests\SpottedChartsAPITests.csproj", "{CC476A14-C217-4CCD-A234-952884FC6440}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SpottedChartsAPITests", "SpottedChartsAPITests\SpottedChartsAPITests.csproj", "{CC476A14-C217-4CCD-A234-952884FC6440}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpottedChartsAPIDomain", "SpottedChartsAPIDomain\SpottedChartsAPIDomain.csproj", "{2019E097-5977-48CB-8ED1-A02C10F1518A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpottedChartsAPIData", "SpottedChartsAPIData\SpottedChartsAPIData.csproj", "{409A7C1F-41CC-4FAD-9083-49A6E46E67C2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +25,14 @@ Global
 		{CC476A14-C217-4CCD-A234-952884FC6440}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CC476A14-C217-4CCD-A234-952884FC6440}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CC476A14-C217-4CCD-A234-952884FC6440}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2019E097-5977-48CB-8ED1-A02C10F1518A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2019E097-5977-48CB-8ED1-A02C10F1518A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2019E097-5977-48CB-8ED1-A02C10F1518A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2019E097-5977-48CB-8ED1-A02C10F1518A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{409A7C1F-41CC-4FAD-9083-49A6E46E67C2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{409A7C1F-41CC-4FAD-9083-49A6E46E67C2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{409A7C1F-41CC-4FAD-9083-49A6E46E67C2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{409A7C1F-41CC-4FAD-9083-49A6E46E67C2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

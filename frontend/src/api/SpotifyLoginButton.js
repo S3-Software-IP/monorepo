@@ -19,7 +19,7 @@ const SpotifyLoginButton = () => {
 
   useEffect(() => {
     const storedAccessToken = localStorage.getItem("accessToken");
-
+1
     if (storedAccessToken) {
       setAccessToken(storedAccessToken);
     } else if (window.location.hash) {

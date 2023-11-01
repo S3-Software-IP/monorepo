@@ -10,7 +10,7 @@
 
         public bool CheckIfUserExists(UserData userData)
         {
-            
+            return false;
         }
     }
 }
