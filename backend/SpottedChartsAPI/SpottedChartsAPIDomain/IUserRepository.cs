@@ -9,6 +9,8 @@ namespace SpottedChartsAPIDomain
 {
     public interface IUserRepository
     {
-        public bool CheckIfUserExists(User userData);
+        public void Add(User user);
+
+        public User Read(string userId);s
     }
 }

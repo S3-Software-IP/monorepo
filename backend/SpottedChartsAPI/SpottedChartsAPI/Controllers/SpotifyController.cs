@@ -10,7 +10,7 @@ namespace SpottedChartsAPI.Controllers
         private readonly UserService _userService;
         public SpotifyController(IConfiguration configuration) 
         {
-            var connetionString = configuration.GetConnectionString("") ?? throw new NullReferenceException("forgor connection stringS");
+            var connetionString = configuration.GetConnectionString("MySqlDB") ?? throw new NullReferenceException("forgor connection stringS");
             _userService = new UserService(new UserRepository(connetionString));
         }
 

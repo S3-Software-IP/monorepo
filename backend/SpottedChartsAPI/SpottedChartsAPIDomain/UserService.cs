@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SpottedChartsAPI;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -14,6 +15,9 @@ namespace SpottedChartsAPIDomain
             _userRepository = userRepository;
         }
 
-        
+        public bool CheckIfUserExists(User user)
+        {
+            _userRepository.Read(user.SpotifyId);
+        }
     }
 }
