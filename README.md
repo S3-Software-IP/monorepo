@@ -4,7 +4,20 @@
 
 'SpottedCharts'
 
-## What?
+- [Software 3 - DB02](#software-3---db02)
+  - [Overview](#overview)
+  - [Maintainers](#maintainers)
+  - [Description](#description)
+  - [Project overview](#project-overview)
+  - [Getting started](#getting-started)
+  - [Definition of Done](#definition-of-done)
+
+## Maintainers
+
+- [Morris](https://github.com/MorrisHannessen)
+- [Joris](https://github.com/theartcher)
+
+## Description
 
 SpottedCharts is an application made to give users more insight into their listening activities, favourites songs, artists and genres. Features (W.I.P):
 
@@ -12,19 +25,24 @@ SpottedCharts is an application made to give users more insight into their liste
 - See your top 50 songs, artists & genres.
 - Interesting statistics about your listening activity.
 - Discover new music.
-- & Much more to come!
+- & much more to come!
 
-## Why?
+## Project overview
 
-This project has started as an application made for our personal project in regard to semester 3 software @ Fontys HBO-ICT.
+![The C4 system context diagram](../monorepo/documentation/diagrams-exported/C4-system-context.svg)
+
+In this diagram you can see the C4 system context diagram for our project. Offering a high level overview of the application including external components, in this case this is only the Spotify Web-API.
 
 ## Getting started
 
-T.B.A
+The SpottedCharts application is built upon a few components, reading the README's in those folders will explain more about the component, their relevance and their connections.
 
-### Running the application
+- [Frontend](./backend/README.md)
+- [Backend](./frontend/README.md)
 
-### Running tests
+The way to get the general local developing environment up and running is done by using the [Dockerfile](./docker-compose.yml), open a terminal at the root of the project and run. _(Note this does assume that you have installed the proper packages/external software required for the applications. See the references above for more information.)_
+
+> docker-compose up -d
 
 ## Definition of Done
 
@@ -43,8 +61,3 @@ T.B.A
 - [ ] **Security Compliance:** Security assessments and penetration testing have been conducted, and any identified vulnerabilities have been mitigated.
 
 - [ ] **Performance and Scalability:** Performance testing has been carried out, and the application meets performance requirements. The system can handle anticipated user loads and scalability requirements.
-
-## Maintainers
-
-- [Morris](https://github.com/MorrisHannessen)
-- [Joris](https://github.com/theartcher)
