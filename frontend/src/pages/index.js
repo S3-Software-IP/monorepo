@@ -13,7 +13,8 @@ export default function Home() {
           <Menu />
         </div>
         <div className="w-8/12 bg-neutral-900 min-h-screen  ">
-          <Top50Group />
+          {/*<Top50Group />
+           */}
           <div className="w-1/12 bg-neutral-900"></div>
         </div>
       </div>

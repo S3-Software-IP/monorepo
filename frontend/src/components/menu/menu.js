@@ -1,5 +1,5 @@
 import React from "react";
-import SpotifyLoginButton from "@/api/SpotifyLoginButton";
+import SpotifyLoginButton from "@/components/menu/SpotifyLoginButton";
 import GetTopNumbersButton from "@/api/GetTopNumbers";
 
 export default function Menu() {
