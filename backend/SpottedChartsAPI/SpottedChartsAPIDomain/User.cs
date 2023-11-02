@@ -1,8 +1,13 @@
-﻿namespace SpottedChartsAPI
+﻿using Microsoft.Extensions.Configuration;
+using Newtonsoft.Json;
+using System.Collections.Specialized;
+
+namespace SpottedChartsAPI
 {
     public class User
     {
         public Guid Id { get; set; }
+        [JsonProperty("id")]
         public string SpotifyId { get; set; }
         public string DisplayName { get; set; }
         public string Email { get; set; }

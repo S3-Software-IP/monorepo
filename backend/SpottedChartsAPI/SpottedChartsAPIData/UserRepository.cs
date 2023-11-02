@@ -32,16 +32,16 @@ namespace SpottedChartsAPI
             }
         }
 
-        public User Read(string userId)
+        public User Read(string spotifyUserId)
         {
-            string selectQuery = "SELECT id, spotify_user_id, email, authorization_token, refresh_token FROM users WHERE id = @UserId";
+            string selectQuery = "SELECT id, spotify_user_id, email, authorization_token, refresh_token FROM users WHERE spotify_user_id = @SpotifyUserId";
             User user = null;
 
             using (SqlConnection connection = new SqlConnection(_connectionString))
             {
                 using (SqlCommand command = new SqlCommand(selectQuery, connection))
                 {
-                    command.Parameters.AddWithValue("@UserId", userId);
+                    command.Parameters.AddWithValue("@SpotifyUserId", spotifyUserId);
 
                     connection.Open();
 
@@ -61,7 +61,6 @@ namespace SpottedChartsAPI
                     }
                 }
             }
-
             return user;
         }
 

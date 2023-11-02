@@ -11,6 +11,6 @@ namespace SpottedChartsAPIDomain
     {
         public void Add(User user);
 
-        public User Read(string userId);s
+        public User Read(string spotifyUserId);
     }
 }

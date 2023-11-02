@@ -17,7 +17,34 @@ namespace SpottedChartsAPIDomain
 
         public bool CheckIfUserExists(User user)
         {
-            _userRepository.Read(user.SpotifyId);
+            var UserFromDB = _userRepository.Read(user.SpotifyId); //make seprate method
+            if (UserFromDB == null)
+            {
+                return false;
+            }
+            else { return true; }
+        }
+
+        public User UserHandle(User user)
+        {
+            //validation
+            if (!CheckIfUserExists(user))
+            {
+                Register(user);
+                return user;
+            }
+            else
+            {
+                var returnUser = _userRepository.Read(user.SpotifyId);
+                return returnUser;
+            }
+        }
+
+        public User Register(User user)
+        {
+            //validation
+            _userRepository.Add(user);
+            return user;
         }
     }
 }
