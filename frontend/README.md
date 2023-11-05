@@ -12,8 +12,8 @@ _Help me! I'm lost, take me to the [starting page](../README.md) please!_
 ## Overview
 
 The frontend of our application is built with React and Next.js. It's responsible
-for creating a seamless user interface, providing an excellent user experience
-and efficient development.
+for creating a seamless user interface,
+providing an excellent user experience and efficient development.
 
 **Why did we choose React with Next.js?**
 

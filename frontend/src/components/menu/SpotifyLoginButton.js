@@ -1,20 +1,13 @@
-import { SpotifyService } from "@/api/SpotifyService.js";
+import { SpotifyService } from "@/services/SpotifyService.js";
 import { useEffect, useState } from "react";
 
-function MyComponent() {
+function AuthComponent() {
   const [accessToken, setAccessToken] = useState("");
 
   useEffect(() => {
-    const urlParams = new URLSearchParams(window.location.search);
-    const code = urlParams.get("code");
-    const state = urlParams.get("state");
-
     let accessTokenValue = localStorage.getItem("accessToken");
     setAccessToken(accessTokenValue);
-
-    if (code && state) {
-      SpotifyService.setAccessToken(code, state);
-    }
+    console.log("Access token: " + accessToken);
   }, []);
 
   const handleAuthorize = () => {
@@ -22,14 +15,18 @@ function MyComponent() {
   };
 
   return (
-    <div>
-      {accessToken ? (
-        <p>Access Token is already set</p>
-      ) : (
-        <button onClick={handleAuthorize}>Authorize with Spotify</button>
-      )}
+    <div className="flex items-center justify-center">
+      <button
+        className={`bg-green-400 rounded-full px-4 py-2 text-white ${
+          accessToken ? "disabled" : ""
+        }`}
+        onClick={handleAuthorize}
+        disabled={accessToken}
+      >
+        Authorize with Spotify
+      </button>
     </div>
   );
 }
 
-export default MyComponent;
+export default AuthComponent;

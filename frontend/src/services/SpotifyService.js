@@ -12,10 +12,10 @@ export const SpotifyService = {
     window.location.href = LOGIN_URL;
   },
 
-  setAccessToken: async (code, state) => {
+  setAccessToken: async (authorizationCode, state) => {
     const requestBody = new URLSearchParams();
     requestBody.append("grant_type", "authorization_code");
-    requestBody.append("code", code);
+    requestBody.append("code", authorizationCode);
     requestBody.append("redirect_uri", secrets.REDIRECT_URI);
 
     const headers = {
@@ -40,7 +40,6 @@ export const SpotifyService = {
   },
 
   checkAndRefreshAccessToken: async () => {
-    console.warn("Check and refresh");
     const accessToken = localStorage.getItem("accessToken");
 
     if (!accessToken) {
@@ -53,23 +52,52 @@ export const SpotifyService = {
     };
 
     try {
-      const response = await axios.get(SPOTIFY_API_ENDPOINT, { headers });
+      await axios
+        .get(SPOTIFY_API_ENDPOINT, { headers })
+        .then((response) => {
+          localStorage.setItem("userId", response.data.id);
+        })
+        .catch(function (error) {
+          if (error.response) {
+            console.log(error.response.data);
+            console.log(error.response.status);
 
-      if (response.status === 200) {
-        console.log("Access token is valid");
-      } else {
-        // If the access token is invalid, refresh it using the refresh token
-        // Call a function to refresh the access token here (you can add the code)
-      }
+            refreshCurrentToken();
+          } else {
+            console.log("Error", error.message);
+          }
+        });
+
+      const homePageURL = `http://localhost:3000/`;
+      window.location.href = homePageURL;
     } catch (error) {
-      console.error("Error while checking access token:", error);
-
-      if (error.response && error.response.status === 401) {
-        // If the access token is invalid, refresh it using the refresh token
-        // Call a function to refresh the access token here (you can add the code)
-      } else {
-        // Handle other errors as needed
-      }
+      console.error("Error while checking or refreshing access token:", error);
     }
+  },
+
+  refreshCurrentToken: async () => {
+    const refreshToken = localStorage.getItem("refreshToken");
+    const requestBody = new URLSearchParams();
+    requestBody.append("grant_type", "refresh_token");
+    requestBody.append("refresh_token", refreshToken);
+    const headers = {
+      Authorization:
+        "Basic " +
+        new Buffer.from(
+          secrets.CLIENT_ID + ":" + secrets.CLIENT_SECRET
+        ).toString("base64"),
+      "Content-Type": "application/x-www-form-urlencoded",
+    };
+
+    axios
+      .post(SPOTIFY_TOKEN_ENDPOINT, requestBody, { headers })
+      .then((response) => {
+        localStorage.setItem("accessToken", response.data.access_token);
+        localStorage.setItem("refreshToken", response.data.refresh_token);
+      })
+      .catch((error) => {
+        console.error("Error while fetching access token:", error);
+        throw error;
+      });
   },
 };
