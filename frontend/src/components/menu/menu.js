@@ -1,6 +1,4 @@
 import React from "react";
-import SpotifyLoginButton from "@/components/menu/SpotifyLoginButton";
-import GetTopNumbersButton from "@/api/GetTopNumbers";
 
 export default function Menu() {
   return (
@@ -8,16 +6,14 @@ export default function Menu() {
       <div className="flex flex-col mx-5 my-10 text-white bg-blue-500 rounded-lg divide-y-2 divide-blue-600 divide-dotted content-center ">
         <div>
           <div className="p-4">
-            I am some relevant text in the menu. Look at me!
+            We implement the Spotify API to access your data. Please review our
+            (INSERT URL REFERENCE) to review how we handle your data.
           </div>
         </div>
         <div>
           <div className="p-4">
             I am ALSO somehow very relevant to the items you are accessing here.
           </div>
-        </div>
-        <div className="p-4 flex flex-col">
-          <SpotifyLoginButton></SpotifyLoginButton>
         </div>
       </div>
     </>

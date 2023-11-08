@@ -56,6 +56,10 @@ export const SpotifyService = {
         .get(SPOTIFY_API_ENDPOINT, { headers })
         .then((response) => {
           localStorage.setItem("userId", response.data.id);
+          localStorage.setItem("displayName", response.data.display_name);
+          localStorage.setItem("userImageUrl", response.data.images[1].url);
+          localStorage.setItem();
+          localStorage.setItem();
         })
         .catch(function (error) {
           if (error.response) {
