@@ -12,31 +12,13 @@ export const SpotifyService = {
     window.location.href = LOGIN_URL;
   },
 
-  setAccessToken: async (authorizationCode, state) => {
+  setAccessToken: async function (authorizationCode, state) {
     const requestBody = new URLSearchParams();
     requestBody.append("grant_type", "authorization_code");
     requestBody.append("code", authorizationCode);
     requestBody.append("redirect_uri", secrets.REDIRECT_URI);
 
-    const headers = {
-      Authorization:
-        "Basic " +
-        new Buffer.from(
-          secrets.CLIENT_ID + ":" + secrets.CLIENT_SECRET
-        ).toString("base64"),
-      "Content-Type": "application/x-www-form-urlencoded",
-    };
-
-    axios
-      .post(SPOTIFY_TOKEN_ENDPOINT, requestBody, { headers })
-      .then((response) => {
-        localStorage.setItem("accessToken", response.data.access_token);
-        localStorage.setItem("refreshToken", response.data.refresh_token);
-      })
-      .catch((error) => {
-        console.error("Error while fetching access token:", error);
-        throw error;
-      });
+    await this.setAccessRefreshToken(requestBody);
   },
 
   checkAndRefreshAccessToken: async () => {
@@ -58,15 +40,16 @@ export const SpotifyService = {
           localStorage.setItem("userId", response.data.id);
           localStorage.setItem("displayName", response.data.display_name);
           localStorage.setItem("userImageUrl", response.data.images[1].url);
-          localStorage.setItem();
-          localStorage.setItem();
         })
         .catch(function (error) {
           if (error.response) {
             console.log(error.response.data);
-            console.log(error.response.status);
+            const refreshToken = localStorage.getItem("refreshToken");
+            const requestBody = new URLSearchParams();
+            requestBody.append("grant_type", "refresh_token");
+            requestBody.append("refresh_token", refreshToken);
 
-            refreshCurrentToken();
+            this.setAccessRefreshToken(requestBody);
           } else {
             console.log("Error", error.message);
           }
@@ -79,11 +62,7 @@ export const SpotifyService = {
     }
   },
 
-  refreshCurrentToken: async () => {
-    const refreshToken = localStorage.getItem("refreshToken");
-    const requestBody = new URLSearchParams();
-    requestBody.append("grant_type", "refresh_token");
-    requestBody.append("refresh_token", refreshToken);
+  setAccessRefreshToken: async (requestBody) => {
     const headers = {
       Authorization:
         "Basic " +
