@@ -1,38 +1,64 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Frontend - Building with React and Next.js
+
+![Header image (by Mosh Hamedani)](https://i1.wp.com/programmingwithmosh.com/wp-content/uploads/2023/02/Screen-Shot-2023-02-15-at-4.38.58-PM.png?ssl=1)
+
+_Help me! I'm lost, take me to the [starting page](../README.md) please!_
+
+- [Frontend - Building with React and Next.js](#frontend---building-with-react-and-nextjs)
+  - [Overview](#overview)
+  - [Getting Started](#getting-started)
+  - [Learn More](#learn-more)
+
+## Overview
+
+The frontend of our application is built with React and Next.js. It's responsible
+for creating a seamless user interface,
+providing an excellent user experience and efficient development.
+
+**Why did we choose React with Next.js?**
+
+- **Seamless Development:**
+  Next.js simplifies frontend development, making it more efficient and
+  enjoyable for our team.
+
+- **Server-Side Rendering:**
+  The built-in server-side rendering capabilities enhance performance and SEO,
+  ensuring a great user experience.
+
+- **Comprehensive Documentation:**
+  Next.js provides robust documentation and interactive tutorials, making it easy
+  to learn and work with.
+
+These reasons make React with Next.js the ideal choice for crafting our frontend
+application.
 
 ## Getting Started
 
-First, run the development server:
+To run the frontend locally, follow these steps:
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-```
+1. Navigate to the /frontend folder in a terminal.
+2. Use the following command to install the required dependencies:
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+   ```bash
+   npm install
+   ```
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+3. Use the following command to run the local development environment:
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
+   ```bash
+   npm run dev
+   ```
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+4. Navigate to [http://localhost:3000](http://localhost:3000) in your preferred browser,
+   and you are within the frontend application.
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+Please ensure you have the necessary packages and external software installed for
+a smooth experience.
 
 ## Learn More
 
-To learn more about Next.js, take a look at the following resources:
+To learn more about React and Next.js, consider exploring the following resources:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+- [Next.js Documentation](https://nextjs.org/docs) - Learn about Next.js features
+  and API.
+- [Learn Next.js](https://nextjs.org/learn) - An interactive Next.js tutorial.
