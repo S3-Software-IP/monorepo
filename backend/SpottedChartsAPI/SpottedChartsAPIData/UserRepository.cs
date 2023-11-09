@@ -10,58 +10,11 @@ namespace SpottedChartsAPI
         {
             _connectionString = connectionString;
         }
-
-        public void Add(User user)
+        
+        public object GetJsonSnapShot(string spotifyId, SnapShotType snapShotType, int snapShotVersion)
         {
-            string insertQuery = "INSERT INTO users (id, spotify_user_id, email, authorization_token, refresh_token) VALUES (@Id, @SpotifyUserId, @Email, @AuthorizationToken, @RefreshToken)";
-
-            using (SqlConnection connection = new SqlConnection(_connectionString))
-            {
-                using (SqlCommand command = new SqlCommand(insertQuery, connection))
-                {
-                    command.Parameters.AddWithValue("@Id", user.Id);
-                    command.Parameters.AddWithValue("@SpotifyUserId", user.SpotifyId);
-                    command.Parameters.AddWithValue("@Email", user.Email);
-                    command.Parameters.AddWithValue("@AuthorizationToken,", user.AuthorizationToken);
-                    command.Parameters.AddWithValue("@RefreshToken", user.Email);
-
-                    connection.Open();
-
-                    command.ExecuteNonQuery();
-                }
-            }
-        }
-
-        public User Read(string spotifyUserId)
-        {
-            string selectQuery = "SELECT id, spotify_user_id, email, authorization_token, refresh_token FROM users WHERE spotify_user_id = @SpotifyUserId";
-            User user = null;
-
-            using (SqlConnection connection = new SqlConnection(_connectionString))
-            {
-                using (SqlCommand command = new SqlCommand(selectQuery, connection))
-                {
-                    command.Parameters.AddWithValue("@SpotifyUserId", spotifyUserId);
-
-                    connection.Open();
-
-                    using (SqlDataReader reader = command.ExecuteReader())
-                    {
-                        if (reader.Read())
-                        {
-                            user = new User
-                            {
-                                Id = (Guid)reader["id"],
-                                SpotifyId = reader["spotify_user_id"].ToString(),
-                                Email = reader["email"].ToString(),
-                                AuthorizationToken = reader["authorization_token"].ToString(),
-                                RefreshToken = reader["refresh_token"].ToString()
-                            };
-                        }
-                    }
-                }
-            }
-            return user;
+            object json = new object();
+            return json;
         }
 
     }

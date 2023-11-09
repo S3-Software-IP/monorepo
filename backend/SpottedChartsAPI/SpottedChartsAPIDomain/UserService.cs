@@ -1,8 +1,11 @@
-﻿using SpottedChartsAPI;
+﻿using Newtonsoft.Json;
+using SpotifyAPI.Web;
+using SpottedChartsAPI;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.Json.Nodes;
 using System.Threading.Tasks;
 
 namespace SpottedChartsAPIDomain
@@ -15,36 +18,61 @@ namespace SpottedChartsAPIDomain
             _userRepository = userRepository;
         }
 
-        public bool CheckIfUserExists(User user)
-        {
-            var UserFromDB = _userRepository.Read(user.SpotifyId); //make seprate method
-            if (UserFromDB == null)
-            {
-                return false;
-            }
-            else { return true; }
-        }
 
-        public User UserHandle(User user)
-        {
-            //validation
-            if (!CheckIfUserExists(user))
-            {
-                Register(user);
-                return user;
-            }
-            else
-            {
-                var returnUser = _userRepository.Read(user.SpotifyId);
-                return returnUser;
-            }
-        }
+
 
         public User Register(User user)
         {
             //validation
-            _userRepository.Add(user);
+            //_userRepository.Add(user);
             return user;
+        }
+
+        public object GetSnapshot(string spotifyId, SnapShotType snapShotType, int snapShot_id)
+        {
+            object jsonfile = _userRepository.GetJsonSnapShot(spotifyId, snapShotType, snapShot_id);
+            if(!ValidateJsonFile(jsonfile))
+            {
+                throw new Exception("no json file");
+            }
+            //string jsonFileContent = File.ReadAllText(jsonfile.ToString());
+            //if(!ValidateJsonFileContent(jsonFileContent))
+            //{
+                //throw new Exception("no json file content");
+            //}
+            return jsonfile;
+        }
+
+        public bool ValidateJsonFile(object jsonFile)
+        {
+            if(jsonFile == null)
+            {
+                return false;
+            }
+            return true;
+        }
+
+        public bool ValidateJsonFileContent(string jsonfile) 
+        {
+            try
+            {
+                JsonConvert.DeserializeObject(jsonfile);
+                return true;
+            }
+            catch (JsonException)
+            {
+                return false;
+            }
+        }
+
+        public async Task NewUser(string code)
+        {
+            Uri uri = Uri("http://localhost:5543");
+            var response = await new OAuthClient().RequestToken(
+            new AuthorizationCodeTokenRequest("ClientId", "ClientSecret", code, uri));
+
+            var spotify = new SpotifyClient(response.AccessToken);
+            
         }
     }
 }

@@ -9,8 +9,6 @@ namespace SpottedChartsAPIDomain
 {
     public interface IUserRepository
     {
-        public void Add(User user);
-
-        public User Read(string spotifyUserId);
+        public object GetJsonSnapShot(string spotifyId, SnapShotType snapShotType, int snapShotVersion);
     }
 }
