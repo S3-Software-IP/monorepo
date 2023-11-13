@@ -52,8 +52,7 @@ next-env.d.ts
 # next.js
 /.next/
 /out/
-<<<<<<< HEAD
-=======
+
 /cache
 
 # production
@@ -112,7 +111,6 @@ sketch
 # next.js
 /.next/
 /out/
->>>>>>> 005f1bf37de56a20297727c145cb044082391c34
 
 # production
 /build
@@ -195,6 +193,11 @@ bld/
 
 # Visual Studio 2015/2017 cache/options directory
 .vs/
+
+##ignore appsettings
+appsettings.json
+!appsettings.json.example
+
 # Uncomment if you have tasks that create the project's static files in wwwroot
 #wwwroot/
 

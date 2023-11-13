@@ -22,7 +22,6 @@ services:
       - "8234:80"
     depends_on:
       - mysql-server
-
   frontend:
     build:
       context: ./frontend
