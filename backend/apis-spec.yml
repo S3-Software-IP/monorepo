@@ -1,0 +1,232 @@
+openapi: "3.0.2"
+info:
+  title: SpottedCharts
+  version: "1.0"
+  description: The API responsible for handling the requests for Spotify data and user data.
+servers:
+  - url: "{protocol}://api.example.com"
+    variables:
+      protocol:
+        enum:
+          - http
+          - https
+        default: https
+
+paths:
+  /snapshots/{snapshot_id}:
+    get:
+      tags:
+        - Snapshots
+      parameters:
+        - $ref: "#/components/parameters/SnapshotID"
+        - in: query
+          name: snapshotType
+          required: false
+          schema:
+            $ref: "#/components/schemas/snapshotType"
+        - in: query
+          name: spotifyUserId
+          description: The Spotify user ID
+          required: false
+          schema:
+            type: string
+      responses:
+        "200":
+          description: OK
+
+  /auth/{user_id}:
+    post:
+      tags:
+        - Authorization
+      parameters:
+        - $ref: "#/components/parameters/UserID"
+      requestBody:
+        description: The user object, tokens and refresh tokens.
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/User"
+      responses:
+        "201":
+          description: Created the authorization object.
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "401":
+          $ref: "#/components/responses/UnauthorizedResponse"
+        default:
+          $ref: "#/components/responses/DefaultResponse"
+
+components:
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: X-API-KEY
+
+  schemas:
+    User:
+      type: object
+      properties:
+        id:
+          type: string
+        spotifyUserId:
+          type: string
+        email:
+          type: string
+          format: email
+        authToken:
+          type: string
+        refreshToken:
+          type: string
+
+    Error:
+      type: object
+      properties:
+        error:
+          type: string
+
+    snapshotType:
+      type: string
+      enum:
+        - track
+        - genre
+        - artist
+
+    Song:
+      type: object
+      properties:
+        id:
+          type: string
+          maxLength: 64
+        artist:
+          type: string
+          maxLength: 60
+        title:
+          type: string
+          maxLength: 250
+        songUrl:
+          type: string
+          maxLength: 250
+        spotifyCoverArtUrl:
+          type: string
+          maxLength: 250
+      required:
+        - id
+        - artist
+        - title
+        - songUrl
+        - spotifyCoverArtUrl
+
+    Snapshot:
+      type: object
+      properties:
+        createdAt:
+          type: string
+          format: date-time
+        ownerSpotifyId:
+          type: string
+          maxLength: 40
+        type:
+          type: string
+          enum:
+            - Artists
+            - Tracks
+            - Genres
+        timeRange:
+          type: string
+          enum:
+            - short_range
+            - medium_range
+            - long_range
+        rankings:
+          type: array
+          items:
+            $ref: "#/components/schemas/Song"
+          minItems: 1
+          maxItems: 50
+
+    SnapshotDB:
+      type: object
+      properties:
+        userId:
+          type: string
+          format: uuid
+        dateTaken:
+          type: string
+          format: date-time
+        snapshot:
+          $ref: "#/components/schemas/Snapshot"
+        snapshotType:
+          type: string
+          enum:
+            - artist
+            - genre
+            - song
+      required:
+        - userId
+        - dateTaken
+        - snapshot
+        - snapshotType
+
+  responses:
+    NotFoundResponse:
+      description: Resource not found.
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/Error"
+
+    BadRequestResponse:
+      description: Bad Request.
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/Error"
+
+    UnauthorizedResponse:
+      description: API key is missing or invalid.
+      headers:
+        WWW_Authenticate:
+          schema:
+            $ref: "#/components/schemas/Error"
+
+    DefaultResponse:
+      description: An error occurred.
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/Error"
+
+  parameters:
+    SnapshotID:
+      name: snapshot_id
+      in: path
+      description: The ID of the snapshot within the database.
+      required: true
+      schema:
+        type: string
+        format: uuid
+        example: c7e5d410-78ba-4736-830d-202742c4eec6
+
+    UserID:
+      name: user_id
+      in: path
+      description: The user ID within the database.
+      required: true
+      schema:
+        type: string
+        format: uuid
+        example: c7e5d410-78ba-4736-830d-202742c4eec6
+
+    SpotifyUserID:
+      name: spotify_user_id
+      in: path
+      description: The Spotify ID of the users' account.
+      required: true
+      schema:
+        type: string
+        example: morris.hannessen
+
+security:
+  - ApiKeyAuth: []
