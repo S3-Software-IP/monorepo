@@ -4,11 +4,9 @@
 
 'SpottedCharts'
 
+## What?
 
-### What?
-
-SpottedCharts is an application made to give users more insight into their listening activites, favourites songs, artists and genres. Features (W.I.P):
-
+SpottedCharts is an application made to give users more insight into their listening activities, favourites songs, artists and genres. Features (W.I.P):
 
 - Your historical rankings of songs, artists & genres.
 - See your top 50 songs, artists & genres.
