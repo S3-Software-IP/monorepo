@@ -18,12 +18,12 @@ namespace SpottedChartsAPI.Controllers
         }
 
         [HttpGet]
-        [Route("/snapshots/{snapshot_id}")]
-        public Task GetSnapShot(int snapshot_id, SnapShotType snapShotType, string spotifyUserId)
+        [Route("/snapshots/{snapshotId}")]
+        public Task GetSnapShot(int snapshotId, SnapShotType snapShotType, string spotifyUserId)
         {
             try
             {
-                var jsonfile = _userService.GetSnapshot(spotifyUserId, snapShotType, snapshot_id);
+                var jsonfile = _userService.GetSnapshot(spotifyUserId, snapShotType, snapshotId);
                 return Task.FromResult(jsonfile);
             }
             catch(Exception ex)

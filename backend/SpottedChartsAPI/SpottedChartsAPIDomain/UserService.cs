@@ -65,8 +65,9 @@ namespace SpottedChartsAPIDomain
             }
         }
 
-        public async Task NewUser(string code)
+        /*public async Task NewUser(string code)
         {
+            
             Uri uri = Uri("http://localhost:5543");
             var response = await new OAuthClient().RequestToken(
             new AuthorizationCodeTokenRequest("ClientId", "ClientSecret", code, uri));
@@ -74,5 +75,6 @@ namespace SpottedChartsAPIDomain
             var spotify = new SpotifyClient(response.AccessToken);
             
         }
+        */
     }
 }
