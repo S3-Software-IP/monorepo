@@ -9,8 +9,10 @@ const SPOTIFY_REFRESH_TOKEN_ENDPOINT = "https://accounts.spotify.com/api/token";
 
 const SCOPES_DELIMITER = "%20";
 const SCOPES = ["user-top-read"];
+
 SCOPES.push("user-read-private");
 SCOPES.push("user-read-email");
+
 const SCOPES_URL_PARAM = SCOPES.join(SCOPES_DELIMITER);
 
 const SpotifyLoginButton = () => {
@@ -19,7 +21,7 @@ const SpotifyLoginButton = () => {
 
   useEffect(() => {
     const storedAccessToken = localStorage.getItem("accessToken");
-1
+
     if (storedAccessToken) {
       setAccessToken(storedAccessToken);
     } else if (window.location.hash) {
