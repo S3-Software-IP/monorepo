@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
 using Microsoft.SqlServer.Server;
 using Newtonsoft.Json;
+using SpotifyAPI.Web;
 using SpottedChartsAPIDomain;
 using System.Collections.Specialized;
 using System.Net;
@@ -11,10 +13,12 @@ namespace SpottedChartsAPI.Controllers
     public class SpotifyController : Controller
     {
         private readonly UserService _userService;
+        private readonly IConfiguration _configuration;
         public SpotifyController(IConfiguration configuration) 
         {
             var connetionString = configuration.GetConnectionString("MySqlDB") ?? throw new NullReferenceException("forgor connection stringS");
             _userService = new UserService(new UserRepository(connetionString));
+            _configuration = configuration;
         }
 
         [HttpGet]
@@ -37,6 +41,15 @@ namespace SpottedChartsAPI.Controllers
         public Task UserAuth([FromBody] User user)
         {
             return Task.CompletedTask;
+        }
+
+        [HttpPost]
+        [Route("/test")]
+        public Task<string> TestingTopTracks(string token)
+        {
+            SpotifyService spotifyService = new SpotifyService(_configuration);
+
+             return  spotifyService.SpotifyRequests(token);
         }
     }
 }
