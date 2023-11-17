@@ -1,19 +1,12 @@
 ﻿using Newtonsoft.Json;
-using SpotifyAPI.Web;
-using SpottedChartsAPI;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Text.Json.Nodes;
-using System.Threading.Tasks;
+using SpottedChartsAPIDomain.Enums;
 
-namespace SpottedChartsAPIDomain
+namespace SpottedChartsAPIDomain.Services
 {
     public class UserService
     {
         private readonly IUserRepository _userRepository;
-        public UserService(IUserRepository userRepository) 
+        public UserService(IUserRepository userRepository)
         {
             _userRepository = userRepository;
         }
@@ -21,38 +14,38 @@ namespace SpottedChartsAPIDomain
 
 
 
-        public User Register(User user)
-        {
-            //validation
-            //_userRepository.Add(user);
-            return user;
-        }
-
+        /*  public User Register(User user)
+          {
+              //validation
+              //_userRepository.Add(user);
+              return user;
+          }
+  */
         public object GetSnapshot(string spotifyId, SnapShotType snapShotType, int snapShot_id)
         {
             object jsonfile = _userRepository.GetJsonSnapShot(spotifyId, snapShotType, snapShot_id);
-            if(!ValidateJsonFile(jsonfile))
+            if (!ValidateJsonFile(jsonfile))
             {
                 throw new Exception("no json file");
             }
             //string jsonFileContent = File.ReadAllText(jsonfile.ToString());
             //if(!ValidateJsonFileContent(jsonFileContent))
             //{
-                //throw new Exception("no json file content");
+            //throw new Exception("no json file content");
             //}
             return jsonfile;
         }
 
         public bool ValidateJsonFile(object jsonFile)
         {
-            if(jsonFile == null)
+            if (jsonFile == null)
             {
                 return false;
             }
             return true;
         }
 
-        public bool ValidateJsonFileContent(string jsonfile) 
+        public bool ValidateJsonFileContent(string jsonfile)
         {
             try
             {

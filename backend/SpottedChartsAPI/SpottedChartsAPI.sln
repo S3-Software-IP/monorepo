@@ -7,9 +7,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SpottedChartsAPI", "Spotted
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SpottedChartsAPITests", "SpottedChartsAPITests\SpottedChartsAPITests.csproj", "{CC476A14-C217-4CCD-A234-952884FC6440}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpottedChartsAPIDomain", "SpottedChartsAPIDomain\SpottedChartsAPIDomain.csproj", "{2019E097-5977-48CB-8ED1-A02C10F1518A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SpottedChartsAPIDomain", "SpottedChartsAPIDomain\SpottedChartsAPIDomain.csproj", "{2019E097-5977-48CB-8ED1-A02C10F1518A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpottedChartsAPIData", "SpottedChartsAPIData\SpottedChartsAPIData.csproj", "{409A7C1F-41CC-4FAD-9083-49A6E46E67C2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SpottedChartsAPIData", "SpottedChartsAPIData\SpottedChartsAPIData.csproj", "{409A7C1F-41CC-4FAD-9083-49A6E46E67C2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

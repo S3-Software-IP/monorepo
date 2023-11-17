@@ -1,7 +1,7 @@
 ﻿using SpottedChartsAPIDomain;
-using System.Data.SqlClient;
+using SpottedChartsAPIDomain.Enums;
 
-namespace SpottedChartsAPI
+namespace SpottedChartsAPIData.Repositories
 {
     public class UserRepository : IUserRepository
     {
@@ -10,7 +10,7 @@ namespace SpottedChartsAPI
         {
             _connectionString = connectionString;
         }
-        
+
         public object GetJsonSnapShot(string spotifyId, SnapShotType snapShotType, int snapShotVersion)
         {
             object json = new object();
