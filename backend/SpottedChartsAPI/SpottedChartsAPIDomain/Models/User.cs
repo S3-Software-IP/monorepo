@@ -2,7 +2,7 @@
 using Newtonsoft.Json;
 using System.Collections.Specialized;
 
-namespace SpottedChartsAPI
+namespace SpottedChartsAPIDomain.Models
 {
     public class User
     {

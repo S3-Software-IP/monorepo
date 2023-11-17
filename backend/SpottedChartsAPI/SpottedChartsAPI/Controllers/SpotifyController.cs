@@ -3,10 +3,13 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.SqlServer.Server;
 using Newtonsoft.Json;
 using SpotifyAPI.Web;
-using SpottedChartsAPIDomain;
+using SpottedChartsAPIDomain.Enums;
+using SpottedChartsAPIDomain.Models;
+using SpottedChartsAPIDomain.Services;
 using System.Collections.Specialized;
 using System.Net;
 using System.Net.Http.Headers;
+using SpottedChartsAPIData.Repositories;
 
 namespace SpottedChartsAPI.Controllers
 {
@@ -14,10 +17,10 @@ namespace SpottedChartsAPI.Controllers
     {
         private readonly UserService _userService;
         private readonly IConfiguration _configuration;
-        public SpotifyController(IConfiguration configuration) 
+        public SpotifyController(IConfiguration configuration)
         {
             var connetionString = configuration.GetConnectionString("MySqlDB") ?? throw new NullReferenceException("forgor connection stringS");
-            _userService = new UserService(new UserRepository(connetionString));
+            _userService = new UserService(new UserRepository(connetionString), configuration);
             _configuration = configuration;
         }
 
@@ -30,7 +33,7 @@ namespace SpottedChartsAPI.Controllers
                 var jsonfile = _userService.GetSnapshot(spotifyUserId, snapShotType, snapshotId);
                 return Task.FromResult(jsonfile);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 return Task.FromException(ex);
             }
@@ -40,16 +43,15 @@ namespace SpottedChartsAPI.Controllers
         [Route("/auth/")]
         public Task UserAuth([FromBody] User user)
         {
-            return Task.CompletedTask;
-        }
-
-        [HttpPost]
-        [Route("/test")]
-        public Task<string> TestingTopTracks(string token)
-        {
-            SpotifyService spotifyService = new SpotifyService(_configuration);
-
-             return  spotifyService.SpotifyRequests(token);
+            try
+            {
+                _userService.UserAuth(user);
+                return Task.CompletedTask;
+            }
+            catch(Exception ex)
+            {
+                return Task.FromException(ex);
+            }
         }
     }
 }
