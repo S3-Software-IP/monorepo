@@ -1,4 +1,7 @@
-﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
+using SpotifyAPI.Web;
+using System.Collections.Generic;
+using System.Reflection.Emit;
 
 namespace SpottedChartsAPIDomain.Models;
 
@@ -86,3 +89,4 @@ public partial class SpottedChartsContext : DbContext
 
     partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
 }
+

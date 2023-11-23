@@ -9,3 +9,4 @@ public class ArtistSnapshotsContent : ISnapshotContent
     public string CoverArtURL { get; set; }
     public string SpotifyUrl { get; set; }
 }
+
