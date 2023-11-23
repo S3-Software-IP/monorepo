@@ -5,8 +5,8 @@ namespace SpottedChartsAPIDomain.Interfaces;
 public interface ISnapshotRepository
 {
     public SnapshotDTO GetById(Guid id);
-    public List<SnapshotDTO> GetByUser(string userId);
-    public void Delete(Guid id);
-    public void Update(SnapshotDTO snapshot);
-    public void Create(SnapshotDTO snapshot);
+    public List<SnapshotDTO> GetByUserId(string userId);
+    public bool Delete(Guid id);
+    public bool Update(SnapshotDTO snapshot);
+    public bool Create(SnapshotDTO snapshot);
 }

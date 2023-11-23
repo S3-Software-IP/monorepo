@@ -3,7 +3,7 @@ using SpottedChartsAPIDomain.Interfaces;
 
 namespace SpottedChartsAPIDomain.Services
 {
-    public class SnapshotService
+    public class SnapshotService : ISnapshotService
     {
 
         private readonly ISnapshotRepository _snapshotRepository;
@@ -12,10 +12,26 @@ namespace SpottedChartsAPIDomain.Services
             _snapshotRepository = snapshotRepository;
         }
 
-        public List<SnapshotDTO> GetAll(string userId)
+        public List<SnapshotDTO> GetBySpotifyId(string spotifyUserId)
         {
-            List<SnapshotDTO> consents = _snapshotRepository.GetByUser(userId);
+            List<SnapshotDTO> consents = _snapshotRepository.GetByUserId(spotifyUserId);
             return consents;
+        }
+
+        public SnapshotDTO GetById(Guid snapshotId)
+        {
+            return _snapshotRepository.GetById(snapshotId);
+        }
+
+        public bool Delete(Guid id)
+        {
+            return _snapshotRepository.Delete(id);
+        }
+
+        public bool Create(SnapshotDTO snapshotDTO)
+        {
+            return _snapshotRepository.Create(snapshotDTO);
+
         }
     }
 }
