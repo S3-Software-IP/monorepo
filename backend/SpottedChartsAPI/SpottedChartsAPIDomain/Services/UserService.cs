@@ -31,12 +31,6 @@ namespace SpottedChartsAPIDomain.Services
             }
         }
 
-        public object GetSnapshot(string spotifyId, SnapShotType snapShotType, int snapShot_id)
-        {
-            object jsonfile = _userRepository.Get(spotifyId, snapShotType, snapShot_id);
-            return jsonfile;
-        }
-
         private void Register(User user)
         {
             _userRepository.Create(user);

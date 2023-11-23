@@ -10,8 +10,11 @@ namespace SpottedChartsAPIDomain.intefaces
 {
     public interface IUserRepository
     {
-        public object Get(string spotifyId, SnapShotType snapShotType, int snapShotVersion);
-        public bool CheckIfUserExists(string userId);
         public void Create(User user);
+        public User ReadBy(Guid userId);
+        public List<User> ReadAll();
+        public void Update(User user);
+        public void Delete(Guid userId);
+        public bool CheckIfUserExists(string userId);
     }
 }

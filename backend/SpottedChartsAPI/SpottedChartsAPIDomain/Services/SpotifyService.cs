@@ -11,6 +11,7 @@ using Newtonsoft.Json;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
 using SpottedChartsAPIDomain.Models;
+using SpottedChartsAPIDomain.DTOs;
 
 namespace SpottedChartsAPIDomain.Services
 {
@@ -53,5 +54,9 @@ namespace SpottedChartsAPIDomain.Services
             return User;
         }
 
+        public List<SnapshotDTO> GetUserId(string spotifyUserId)
+        {
+            return new List<SnapshotDTO>();
+        }
     }
 }
