@@ -1,17 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.Extensions.Configuration;
-using SpotifyAPI.Web;
-using SpotifyAPI.Web.Http;
-using Swan;
+﻿using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
-using System.Diagnostics;
-using System.Runtime.InteropServices;
-using SpottedChartsAPIDomain.Models;
+using SpotifyAPI.Web;
 using SpottedChartsAPIDomain.DTOs;
+using SpottedChartsAPIDomain.Models;
 
 namespace SpottedChartsAPIDomain.Services
 {
@@ -47,7 +38,6 @@ namespace SpottedChartsAPIDomain.Services
             var User = new User
             {
                 SpotifyUserId = PrivateUser.Id,
-                DisplayName = PrivateUser.DisplayName,
                 Email = PrivateUser.Email,
             };
 

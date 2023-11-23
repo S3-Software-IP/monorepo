@@ -1,98 +1,66 @@
-﻿using SpottedChartsAPIDomain;
-using System.Data.SqlClient;
-using SpottedChartsAPIDomain.Enums;
+﻿using AutoMapper;
+using Microsoft.Extensions.Configuration;
+using SpottedChartsAPIDomain.DTOs;
 using SpottedChartsAPIDomain.intefaces;
 using SpottedChartsAPIDomain.Models;
-using Microsoft.EntityFrameworkCore;
 
 
 namespace SpottedChartsAPIData.Repositories
 {
     public class UserRepository : IUserRepository
     {
-        private string _connectionString;
-        public UserRepository(string connectionString)
+        private readonly string _connectionString;
+        private readonly IMapper _mapper;
+        private readonly SpottedChartsContext _dbcontext;
+        public UserRepository(IConfiguration configuration, IMapper mapper)
         {
-            _connectionString = connectionString;
-        }
-        
-        public void Create(User user)
-        {
-            using (var dbContext = new SpottedChartsContext(_connectionString))
-            {
-                
-                var userEntity = new User
-                {
-                    Id = Guid.NewGuid().ToString(),
-                    SpotifyUserId = user.SpotifyUserId,
-                    DisplayName = user.DisplayName,
-                    Email = user.Email,
-                    AuthToken = user.AuthToken,
-                    RefreshToken = user.RefreshToken
-                };
-
-                dbContext.Users.Add(userEntity);
-                dbContext.SaveChanges();
-            }
+            _connectionString = configuration.GetConnectionString("MySqlDB");
+            _mapper = mapper;
+            _dbcontext = new SpottedChartsContext(_connectionString);
         }
 
-        public User Get(string spotifyId)
+        public void Create(UserDTO user)
         {
-            using (var dbContext = new SpottedChartsContext(_connectionString))
-            {
-                var userEntity = dbContext.Users.Find(spotifyId);
-                return userEntity;
-            }
+            User convertedUser = _mapper.Map<User>(user);
+            _dbcontext.Users.Add(convertedUser);
+            _dbcontext.SaveChanges();
         }
 
-        public List<User> GetAll()
+        public UserDTO Get(string spotifyId)
         {
-            using (var dbContext = new SpottedChartsContext(_connectionString))
-            {
-                var users = dbContext.Users.ToList();
-                return users;
-            }
+            User userEntity = _dbcontext.Users.FirstOrDefault(u => u.SpotifyUserId == spotifyId);
+            return _mapper.Map<UserDTO>(userEntity);
         }
 
-        public void Update(User user)
+        public void Update(UserDTO user)
         {
-            using (var dbContext = new SpottedChartsContext(_connectionString))
+            var existingUser = _dbcontext.Users.Find(user.Id);
+
+            if (existingUser != null)
             {
-                var existingUser = dbContext.Users.Find(user.Id);
+                existingUser.SpotifyUserId = user.SpotifyUserId;
+                existingUser.Email = user.Email;
+                existingUser.AuthToken = user.AuthToken;
+                existingUser.RefreshToken = user.RefreshToken;
 
-                if (existingUser != null)
-                {
-                    existingUser.SpotifyUserId = user.SpotifyUserId;
-                    existingUser.DisplayName = user.DisplayName;
-                    existingUser.Email = user.Email;
-                    existingUser.AuthToken = user.AuthToken;
-                    existingUser.RefreshToken = user.RefreshToken;
-
-                    dbContext.SaveChanges();
-                }
+                _dbcontext.SaveChanges();
             }
         }
 
         public void Delete(Guid userId)
         {
-            using (var dbContext = new SpottedChartsContext(_connectionString))
-            {
-                var userEntity = dbContext.Users.Find(userId);
+            var userEntity = _dbcontext.Users.Find(userId);
 
-                if (userEntity != null)
-                {
-                    dbContext.Users.Remove(userEntity);
-                    dbContext.SaveChanges();
-                }
+            if (userEntity != null)
+            {
+                _dbcontext.Users.Remove(userEntity);
+                _dbcontext.SaveChanges();
             }
         }
 
-        public bool CheckIfUserExists(string spotifyId)
+        public bool DoesUserExist(string spotifyId)
         {
-            using (var dbContext = new SpottedChartsContext(_connectionString))
-            {
-                return dbContext.Users.Any(u => u.SpotifyUserId == spotifyId);
-            }
+            return _dbcontext.Users.Any(u => u.SpotifyUserId == spotifyId);
         }
 
     }

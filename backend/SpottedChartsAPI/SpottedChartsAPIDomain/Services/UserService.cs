@@ -1,32 +1,20 @@
-using Microsoft.Extensions.Configuration;
-using Newtonsoft.Json;
-using SpotifyAPI.Web;
-using SpottedChartsAPIDomain.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Text.Json.Nodes;
-using System.Threading.Tasks;
+using SpottedChartsAPIDomain.DTOs;
 using SpottedChartsAPIDomain.intefaces;
-
-using SpottedChartsAPIDomain.Enums;
+using SpottedChartsAPIDomain.Interfaces;
 
 namespace SpottedChartsAPIDomain.Services
 {
-    public class UserService
+    public class UserService : IUserService
     {
         private readonly IUserRepository _userRepository;
-        private readonly SpotifyService _spotifyService;
-        public UserService(IUserRepository userRepository, IConfiguration configuration)
+        public UserService(IUserRepository userRepository)
         {
             _userRepository = userRepository;
-            _spotifyService = new SpotifyService(configuration);
         }
 
-        public User UserAuth(User user)
+        public UserDTO UserAuth(UserDTO user)
         {
-            if (!_userRepository.CheckIfUserExists(user.SpotifyUserId))
+            if (!_userRepository.DoesUserExist(user.SpotifyUserId))
             {
                 try
                 {
@@ -52,68 +40,31 @@ namespace SpottedChartsAPIDomain.Services
             }
         }
 
-        private void Create(User user)
+        private void Create(UserDTO user)
         {
-            if(!IsUserValid(user))
-            {
-                throw new Exception("User validation failed.");
-            }
             _userRepository.Create(user);
         }
 
-        public void Update(User user)
+        public void Update(UserDTO user)
         {
-            if (!IsUserValid(user))
-            {
-                throw new Exception("User validation failed.");
-            }
             _userRepository.Update(user);
         }
 
-        public void Delete(User user)
+        public void Delete(Guid userId)
         {
-            if (!IsUserValid(user))
-            {
-                throw new Exception("User validation failed.");
-            }
-            _userRepository.Delete(Guid.Parse(user.Id));
+            _userRepository.Delete(userId);
         }
 
-        private User GetUser(string spotify_id)
+        public UserDTO GetUser(string spotify_id)
         {
-            if(!IsSpotifyIdValid(spotify_id))
+            if (!IsSpotifyIdValid(spotify_id))
             {
-                throw new Exception("Unvalid Sotify id.");
+                throw new Exception("Invalid Spotify id.");
             }
+
             var user = _userRepository.Get(spotify_id);
-            if(!IsUserValid(user))
-            {
-                throw new Exception("An unvalid user got returned.");
-            }
+
             return user;
-        }
-
-        public List<User> GetAllUsers()
-        {
-            List<User> users;
-            users = _userRepository.GetAll();
-            foreach (User user in users)
-            {
-                if (!IsUserValid(user))
-                {
-                    throw new Exception("An unvalid user got returned.");
-                }
-            }
-            return users;
-        }
-
-        private bool IsUserValid(User user)
-        {
-            if(user.Id != null && user.SpotifyUserId != null && user.Email != null && user.RefreshToken != null && user.AuthToken != null && user.DisplayName != null)
-            {
-                return true;
-            }
-            else return false;
         }
 
         private bool IsSpotifyIdValid(string spotify_id)
@@ -122,7 +73,8 @@ namespace SpottedChartsAPIDomain.Services
             {
                 return true;
             }
-            else return false;
+
+            return false;
         }
     }
 }
