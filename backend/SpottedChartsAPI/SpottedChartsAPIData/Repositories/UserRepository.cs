@@ -21,11 +21,11 @@ namespace SpottedChartsAPIData.Repositories
                 
                 var userEntity = new User
                 {
-                    Id = Guid.NewGuid(),
-                    SpotifyId = user.SpotifyId,
+                    Id = Guid.NewGuid().ToString(),
+                    SpotifyUserId = user.SpotifyUserId,
                     DisplayName = user.DisplayName,
                     Email = user.Email,
-                    AuthorizationToken = user.AuthorizationToken,
+                    AuthToken = user.AuthToken,
                     RefreshToken = user.RefreshToken
                 };
 
@@ -34,16 +34,16 @@ namespace SpottedChartsAPIData.Repositories
             }
         }
 
-        public User ReadBy(Guid userId)
+        public User Get(string spotifyId)
         {
             using (var dbContext = new SpottedChartsContext(_connectionString))
             {
-                var userEntity = dbContext.Users.Find(userId);
+                var userEntity = dbContext.Users.Find(spotifyId);
                 return userEntity;
             }
         }
 
-        public List<User> ReadAll()
+        public List<User> GetAll()
         {
             using (var dbContext = new SpottedChartsContext(_connectionString))
             {
@@ -60,10 +60,10 @@ namespace SpottedChartsAPIData.Repositories
 
                 if (existingUser != null)
                 {
-                    existingUser.SpotifyId = user.SpotifyId;
+                    existingUser.SpotifyUserId = user.SpotifyUserId;
                     existingUser.DisplayName = user.DisplayName;
                     existingUser.Email = user.Email;
-                    existingUser.AuthorizationToken = user.AuthorizationToken;
+                    existingUser.AuthToken = user.AuthToken;
                     existingUser.RefreshToken = user.RefreshToken;
 
                     dbContext.SaveChanges();
@@ -89,7 +89,7 @@ namespace SpottedChartsAPIData.Repositories
         {
             using (var dbContext = new SpottedChartsContext(_connectionString))
             {
-                return dbContext.Users.Any(u => u.SpotifyId == spotifyId);
+                return dbContext.Users.Any(u => u.SpotifyUserId == spotifyId);
             }
         }
     }

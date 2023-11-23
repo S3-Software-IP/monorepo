@@ -28,29 +28,21 @@ namespace SpottedChartsAPI.Controllers
         [Route("/snapshots/{snapshotId}")]
         public Task GetSnapShot(int snapshotId, SnapShotType snapShotType, string spotifyUserId)
         {
-            try
-            {
-                var jsonfile = _userService.GetSnapshot(spotifyUserId, snapShotType, snapshotId);
-                return Task.FromResult(jsonfile);
-            }
-            catch (Exception ex)
-            {
-                return Task.FromException(ex);
-            }
+            return Task.CompletedTask;
         }
 
-        [HttpPost]
+        [HttpGet]
         [Route("/auth/")]
-        public Task UserAuth([FromBody] User user)
+        public Task<User> UserAuth([FromBody] User user)
         {
             try
             {
-                _userService.UserAuth(user);
-                return Task.CompletedTask;
+                var returnUser = _userService.UserAuth(user);
+                return Task.FromResult(returnUser);
             }
             catch(Exception ex)
             {
-                return Task.FromException(ex);
+                return Task.FromException<User>(ex);
             }
         }
     }

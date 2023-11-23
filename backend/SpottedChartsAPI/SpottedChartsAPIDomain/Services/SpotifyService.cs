@@ -46,7 +46,7 @@ namespace SpottedChartsAPIDomain.Services
             var PrivateUser = await spotify.UserProfile.Current();
             var User = new User
             {
-                SpotifyId = PrivateUser.Id,
+                SpotifyUserId = PrivateUser.Id,
                 DisplayName = PrivateUser.DisplayName,
                 Email = PrivateUser.Email,
             };

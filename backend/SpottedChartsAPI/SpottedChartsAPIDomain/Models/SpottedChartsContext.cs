@@ -25,7 +25,7 @@ public partial class SpottedChartsContext : DbContext
     public virtual DbSet<User> Users { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        => optionsBuilder.UseMySQL(_connectionString, ServerVersion.Parse("8.1.0-mysql"));
+        => optionsBuilder.UseMySql(_connectionString, ServerVersion.Parse("8.1.0-mysql"));
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

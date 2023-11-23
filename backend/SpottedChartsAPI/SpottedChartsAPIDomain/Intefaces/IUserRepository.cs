@@ -11,10 +11,10 @@ namespace SpottedChartsAPIDomain.intefaces
     public interface IUserRepository
     {
         public void Create(User user);
-        public User ReadBy(Guid userId);
-        public List<User> ReadAll();
+        public User Get(string spotifyId);
+        public List<User> GetAll();
         public void Update(User user);
         public void Delete(Guid userId);
-        public bool CheckIfUserExists(string userId);
+        public bool CheckIfUserExists(string spotifyId);
     }
 }
