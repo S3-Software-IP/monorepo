@@ -1,7 +1,4 @@
 using Microsoft.EntityFrameworkCore;
-using SpotifyAPI.Web;
-using System.Collections.Generic;
-using System.Reflection.Emit;
 
 namespace SpottedChartsAPIDomain.Models;
 

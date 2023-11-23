@@ -13,5 +13,8 @@ public class MappingProfile : Profile
             .ForMember(dest => dest.Songs, opt => opt.MapFrom(src => JsonConvert.DeserializeObject<List<SongSnapshotsContent>>(src.SongSnapshot)))
             .ForMember(dest => dest.Genres, opt => opt.MapFrom(src => JsonConvert.DeserializeObject<List<GenreSnapshotContent>>(src.GenreSnapshot)));
 
+        CreateMap<User, UserDTO>();
+        CreateMap<UserDTO, User>();
+
     }
 }

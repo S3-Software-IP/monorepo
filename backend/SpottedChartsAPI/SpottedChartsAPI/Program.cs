@@ -1,4 +1,5 @@
 using SpottedChartsAPIData.Repositories;
+using SpottedChartsAPIDomain.intefaces;
 using SpottedChartsAPIDomain.Interfaces;
 using SpottedChartsAPIDomain.Services;
 
@@ -10,7 +11,10 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddScoped<ISnapshotRepository, SnapshotRepository>();
+builder.Services.AddScoped<IUserRepository, UserRepository>();
+
 builder.Services.AddScoped<ISnapshotService, SnapshotService>();
+builder.Services.AddScoped<IUserService, UserService>();
 
 
 var app = builder.Build();
