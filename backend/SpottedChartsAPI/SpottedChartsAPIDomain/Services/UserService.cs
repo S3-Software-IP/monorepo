@@ -1,4 +1,4 @@
-﻿using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
 using SpotifyAPI.Web;
 using SpottedChartsAPIDomain.Models;
@@ -9,6 +9,7 @@ using System.Text;
 using System.Text.Json.Nodes;
 using System.Threading.Tasks;
 using SpottedChartsAPIDomain.intefaces;
+
 using SpottedChartsAPIDomain.Enums;
 
 namespace SpottedChartsAPIDomain.Services

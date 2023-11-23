@@ -5,15 +5,17 @@ using SpottedChartsAPIDomain.intefaces;
 using SpottedChartsAPIDomain.Models;
 using Microsoft.EntityFrameworkCore;
 
+
 namespace SpottedChartsAPIData.Repositories
 {
     public class UserRepository : IUserRepository
-    {   
+    {
         private string _connectionString;
         public UserRepository(string connectionString)
         {
             _connectionString = connectionString;
         }
+        
         public void Create(User user)
         {
             using (var dbContext = new SpottedChartsContext(_connectionString))
@@ -92,5 +94,6 @@ namespace SpottedChartsAPIData.Repositories
                 return dbContext.Users.Any(u => u.SpotifyUserId == spotifyId);
             }
         }
+
     }
 }
