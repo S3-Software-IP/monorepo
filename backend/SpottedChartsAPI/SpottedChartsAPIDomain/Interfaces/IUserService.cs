@@ -4,7 +4,7 @@ namespace SpottedChartsAPIDomain.Interfaces;
 
 public interface IUserService
 {
-    UserDTO UserAuth(UserDTO user);
+    UserDTO AddUser(UserDTO user);
     void Update(UserDTO user);
     void Delete(Guid userId);
     UserDTO GetUser(string spotify_id);

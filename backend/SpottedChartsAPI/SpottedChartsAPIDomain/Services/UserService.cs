@@ -12,31 +12,22 @@ namespace SpottedChartsAPIDomain.Services
             _userRepository = userRepository;
         }
 
-        public UserDTO UserAuth(UserDTO user)
+        public UserDTO AddUser(UserDTO user)
         {
             if (!_userRepository.DoesUserExist(user.SpotifyUserId))
             {
-                try
+                if (user.Id == null || user.Id == Guid.Empty)
                 {
-                    Create(user);
-                    return user;
+                    user.Id = Guid.NewGuid();
                 }
-                catch (Exception ex)
-                {
-                    throw;
-                }
+
+                Create(user);
+                return user;
             }
             else
             {
-                try
-                {
-                    GetUser(user.SpotifyUserId);
-                    return user;
-                }
-                catch (Exception ex)
-                {
-                    throw;
-                }
+                GetUser(user.SpotifyUserId);
+                return user;
             }
         }
 
@@ -69,10 +60,14 @@ namespace SpottedChartsAPIDomain.Services
 
         private bool IsSpotifyIdValid(string spotify_id)
         {
-            if (spotify_id != null || spotify_id.Length <= 30)
+            if (spotify_id != null)
             {
-                return true;
+                if (spotify_id.Length <= 30)
+                {
+                    return true;
+                }
             }
+
 
             return false;
         }

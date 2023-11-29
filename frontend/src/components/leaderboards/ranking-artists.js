@@ -1,37 +1,40 @@
 import React, { useState, useEffect } from "react";
-import { getTop50Artists_LongTerm } from "@/api/artist-service";
+import { getTop50Artists } from "@/api/artist-service";
 import Artist from "@/components/leaderboard-base-components/artist";
 
 export default function Top50Artists() {
   const [artists, setArtists] = useState([]);
 
   useEffect(() => {
-    const fetch50Artist6Months = async () => {
+    const fetchArtists = async () => {
       try {
-        const apiData = await getTop50Artists_LongTerm();
+        const apiData = (await getTop50Artists()).data;
         setArtists(apiData);
+        console.log("API Data:", apiData);
       } catch (error) {
         console.error("Error fetching Spotify data:", error);
       }
     };
 
-    fetch50Artist6Months();
+    fetchArtists();
   }, []);
 
   return (
-    <>
-      <div className="grid grid-cols-5 gap-2 p-3 justify-center">
-        {artists?.map((artist, index) => (
-          <div key={index} className="flex flex-col items-center">
+    <div className="grid grid-cols-5 gap-2 p-3 justify-center">
+      {artists.length > 0 && artists[0].artists ? (
+        artists[0].artists.map((artist) => (
+          <div key={artist?.rank} className="flex flex-col items-center">
             <Artist
-              index={index + 1}
-              artist={artist?.name}
-              artistCoverURL={artist?.images[1].url}
-              artistSpotifyURL={artist?.external_urls.spotify}
+              index={artist?.rank}
+              artist={artist?.artist}
+              artistCoverURL={artist?.coverArtURL}
+              artistSpotifyURL={artist?.spotifyUrl}
             />
           </div>
-        ))}
-      </div>
-    </>
+        ))
+      ) : (
+        <p>No artists available</p>
+      )}
+    </div>
   );
 }
