@@ -1,4 +1,4 @@
-﻿using SpotifyAPI.Web;
+using SpotifyAPI.Web;
 using SpottedChartsAPIDomain.Models.SnapshotsContent;
 using System.Globalization;
 
