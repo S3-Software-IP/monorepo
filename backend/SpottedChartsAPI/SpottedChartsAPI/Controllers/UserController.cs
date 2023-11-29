@@ -18,7 +18,7 @@ namespace SpottedChartsAPI.Controllers
         {
             try
             {
-                var returnUser = _userService.UserAuth(user);
+                var returnUser = _userService.AddUser(user);
                 return Task.FromResult(returnUser);
             }
             catch (Exception ex)
@@ -28,10 +28,33 @@ namespace SpottedChartsAPI.Controllers
         }
 
         [HttpGet]
-        [Route("/user/{spotifyUserId}")]
+        [Route("/me/{spotifyUserId}")]
         public UserDTO GetUserById(string spotifyUserId)
         {
             return _userService.GetUser(spotifyUserId);
+        }
+
+        [HttpPost]
+        [Route("/me/{spotifyUserId}")]
+        public IActionResult AddUser([FromBody] UserDTO user)
+        {
+            UserDTO existingUser;
+            try
+            {
+                existingUser = _userService.GetUser(user.SpotifyUserId);
+            }
+            catch
+            {
+                return BadRequest("The provided ID is invalid.");
+            }
+
+            if (existingUser != null)
+            {
+                return NoContent();
+            }
+
+            var createdUser = _userService.AddUser(user);
+            return Ok("Succesfully created user: " + createdUser);
         }
     }
 }

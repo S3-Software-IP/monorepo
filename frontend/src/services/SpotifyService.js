@@ -7,7 +7,7 @@ const SPOTIFY_API_ENDPOINT = "https://api.spotify.com/v1/me";
 export const SpotifyService = {
   getAuthorizationToken: () => {
     const STATE = "your_random_state";
-    const SCOPES = "user-read-private user-read-email";
+    const SCOPES = "user-read-private user-read-email user-top-read";
     const LOGIN_URL = `https://accounts.spotify.com/authorize?client_id=${secrets.CLIENT_ID}&redirect_uri=${secrets.REDIRECT_URI}&scope=${SCOPES}&response_type=code&state=${STATE}`;
     window.location.href = LOGIN_URL;
   },
@@ -40,6 +40,7 @@ export const SpotifyService = {
           localStorage.setItem("userId", response.data.id);
           localStorage.setItem("displayName", response.data.display_name);
           localStorage.setItem("userImageUrl", response.data.images[1].url);
+          localStorage.setItem("email", response.data.email);
         })
         .catch(function (error) {
           if (error.response) {

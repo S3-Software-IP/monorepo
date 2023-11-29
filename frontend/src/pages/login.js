@@ -5,18 +5,22 @@ export default function Login() {
   const [accessToken, setAccessToken] = useState("");
 
   useEffect(() => {
-    const userId = localStorage.getItem("userId");
-    if (userId) {
-      const loginUrl = "http://localhost:3000/";
-      window.location.href = loginUrl;
-    }
+    const fetchData = async () => {
+      const userId = localStorage.getItem("userId");
+      if (userId) {
+        const homepageURL = "http://localhost:3000/";
+        window.location.href = homepageURL;
+      }
 
-    let accessTokenValue = localStorage.getItem("accessToken");
-    setAccessToken(accessTokenValue);
+      let accessTokenValue = localStorage.getItem("accessToken");
+      setAccessToken(accessTokenValue);
+    };
+
+    fetchData();
   }, []);
 
-  const handleAuthorize = () => {
-    SpotifyService.getAuthorizationToken();
+  const handleAuthorize = async () => {
+    await SpotifyService.getAuthorizationToken();
   };
 
   return (
@@ -29,7 +33,7 @@ export default function Login() {
           onClick={handleAuthorize}
           disabled={accessToken}
         >
-          Log me in, fuck my privacy. Sell all my data and/or organs.
+          I'd love for you to invade my privacy. Please.
         </button>
       </div>
     </main>
