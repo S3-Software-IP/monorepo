@@ -1,4 +1,4 @@
-version: "3.7"
+version: "3.8"
 
 services:
   mysql-server:
@@ -22,9 +22,11 @@ services:
       - "8234:80"
     depends_on:
       - mysql-server
+
   frontend:
     build:
       context: ./frontend
       dockerfile: Dockerfile
     ports:
       - "3000:3000"
+

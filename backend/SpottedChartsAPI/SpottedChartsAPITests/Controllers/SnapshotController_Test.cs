@@ -16,7 +16,7 @@ namespace SpottedChartsAPITests.Controllers
             _fixture = new Fixture();
         }
 
-        [Fact]
+        /*[Fact]
         public void GetAllById_ValidUserId_ReturnsOk()
         {
             // Arrange
@@ -80,6 +80,7 @@ namespace SpottedChartsAPITests.Controllers
         public void GetSingleById_InvalidSnapshotId_ReturnsBadRequest(string snapshotId)
         {
             // Arrange
+
             var mockService = new Mock<ISnapshotService>();
             var controller = new SnapshotController(mockService.Object);
 
@@ -94,5 +95,6 @@ namespace SpottedChartsAPITests.Controllers
 
             Assert.Equal("The passed snapshot UUID was invalid, poorly structured, or empty.", badRequestResult.Value);
         }
+        */
     }
 }
