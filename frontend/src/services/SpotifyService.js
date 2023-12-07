@@ -1,5 +1,5 @@
 import axios from "axios";
-const secrets = require("@/../../secrets.json");
+const secrets = require("@/../secrets.json");
 
 const SPOTIFY_TOKEN_ENDPOINT = "https://accounts.spotify.com/api/token";
 const SPOTIFY_API_ENDPOINT = "https://api.spotify.com/v1/me";
