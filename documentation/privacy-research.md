@@ -1,6 +1,6 @@
-# Privacy Research
+# How do technology and digital innovations affect online privacy, and what measures achieve a balance between user-friendly services and preserving personal privacy?
 
-## What is privacy
+### What is privacy
 
 Privacy is the right of an individual to keep their personal information, communication with others, activities, and identity protected from intrusion or disclosure. Privacy is a very important human right and is recognized by many countries and states.
 
