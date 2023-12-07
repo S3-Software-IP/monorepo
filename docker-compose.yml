@@ -30,3 +30,9 @@ services:
     ports:
       - "3000:3000"
 
+  backend:
+    build:
+      context: ./backend/SpottedChartsAPI
+      dockerfile: SpottedChartsAPI/Dockerfile
+    ports:
+      - "7065:80"
