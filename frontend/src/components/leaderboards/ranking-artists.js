@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { getTop50Artists } from "@/api/artist-service";
+import { GetAllSnapshots } from "@/api/snapshot-service";
 import Artist from "@/components/leaderboard-base-components/artist";
 
 export default function Top50Artists() {
@@ -8,9 +8,9 @@ export default function Top50Artists() {
   useEffect(() => {
     const fetchArtists = async () => {
       try {
-        const apiData = (await getTop50Artists()).data;
+        const apiData = await GetAllSnapshots();
         setArtists(apiData);
-        console.log("API Data:", apiData);
+        console.log("Artists:", apiData);
       } catch (error) {
         console.error("Error fetching Spotify data:", error);
       }

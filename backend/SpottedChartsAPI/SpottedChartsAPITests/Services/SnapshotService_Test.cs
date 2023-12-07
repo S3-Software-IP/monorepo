@@ -21,13 +21,14 @@ public class SnapshotService_Test
         // Arrange
         string spotifyUserId = "testUser";
         var mockRepository = new Mock<ISnapshotRepository>();
+        var mockService = new Mock<IUserService>();
 
         var mockSnapshots = _fixture.CreateMany<SnapshotDTO>().ToList();
 
         mockRepository.Setup(repo => repo.GetByUserId(spotifyUserId))
                       .Returns(mockSnapshots);
 
-        var snapshotService = new SnapshotService(mockRepository.Object);
+        var snapshotService = new SnapshotService(mockRepository.Object, mockService.Object);
 
         // Act
         var result = snapshotService.GetBySpotifyId(spotifyUserId);
@@ -42,12 +43,13 @@ public class SnapshotService_Test
         // Arrange
         string spotifyUserId = "testUser";
         var mockRepository = new Mock<ISnapshotRepository>();
+        var mockService = new Mock<IUserService>();
         List<SnapshotDTO> repositoryReturnTest = null;
 
         mockRepository.Setup(repo => repo.GetByUserId(spotifyUserId))
             .Returns(repositoryReturnTest);
 
-        var snapshotService = new SnapshotService(mockRepository.Object);
+        var snapshotService = new SnapshotService(mockRepository.Object, mockService.Object);
 
         // Act
         var result = snapshotService.GetBySpotifyId(spotifyUserId);

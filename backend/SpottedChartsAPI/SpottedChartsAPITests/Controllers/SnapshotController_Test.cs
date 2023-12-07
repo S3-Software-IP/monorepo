@@ -22,13 +22,14 @@ namespace SpottedChartsAPITests.Controllers
             // Arrange
             string spotifyUserId = "validUserId";
             var mockService = new Mock<ISnapshotService>();
+            var mockUserService = new Mock<IUserService>();
 
             var mockSnapshots = _fixture.CreateMany<SnapshotDTO>().ToList();
 
             mockService.Setup(service => service.GetBySpotifyId(spotifyUserId))
                        .Returns(mockSnapshots);
 
-            var controller = new SnapshotController(mockService.Object);
+            var controller = new SnapshotController(mockService.Object, mockUserService.Object);
 
             // Act
             var result = controller.GetAllBySpotifyId(spotifyUserId);
@@ -44,7 +45,9 @@ namespace SpottedChartsAPITests.Controllers
         {
             // Arrange
             var mockService = new Mock<ISnapshotService>();
-            var controller = new SnapshotController(mockService.Object);
+            var mockUserService = new Mock<IUserService>();
+
+            var controller = new SnapshotController(mockService.Object, mockUserService.Object);
 
             // Act
             var result = controller.GetAllBySpotifyId(spotifyUserId);
@@ -59,12 +62,14 @@ namespace SpottedChartsAPITests.Controllers
             // Arrange
             Guid snapshotId = Guid.NewGuid();
             var mockService = new Mock<ISnapshotService>();
+            var mockUserService = new Mock<IUserService>();
+
             var mockSnapshot = _fixture.Create<SnapshotDTO>();
 
             mockService.Setup(service => service.GetById(snapshotId))
                        .Returns(mockSnapshot);
 
-            var controller = new SnapshotController(mockService.Object);
+            var controller = new SnapshotController(mockService.Object, mockUserService.Object);
 
             // Act
             var result = controller.GetSingleById(snapshotId.ToString());
@@ -81,7 +86,9 @@ namespace SpottedChartsAPITests.Controllers
         {
             // Arrange
             var mockService = new Mock<ISnapshotService>();
-            var controller = new SnapshotController(mockService.Object);
+            var mockUserService = new Mock<IUserService>();
+
+            var controller = new SnapshotController(mockService.Object, mockUserService.Object);
 
             // Act
             var result = controller.GetSingleById(snapshotId);
