@@ -40,8 +40,10 @@ During our duo project we came to the conclusion that when didn't really needed 
 
 Our lead question: How do technology and digital innovations affect online privacy?
 
-Technology and digital innovations bring unprecedented connectivity and convenience, but they also raise concerns about online privacy. One major impact is the surge in data collection for purposes like targeted advertising, posing questions about consent and potential misuse of sensitive information.
+Technology and digital innovations bring unthinkable connectivity and convenience, but they also raise concerns about online privacy. One major impact is the surge in data collection for purposes like targeted advertising, posing questions about consent and potential misuse of sensitive information.
 
 The use of artificial intelligence and machine learning introduces challenges in privacy preservation. Automated decision-making fueled by vast datasets may result in unintended biases and privacy infringements, requiring a delicate balance between innovation and safeguarding individual privacy rights.
 
-While legislation like the General Data Protection Regulation (GDPR) aims to address these concerns, the rapid pace of technological advancement often outpaces regulatory frameworks. Ongoing efforts are crucial to adapt and strengthen privacy protections, involving collaboration between technology developers, policymakers, and users to ensure a digital landscape that respects and protects individuals' privacy rights.
+While government intuition like the General Data Protection Regulation try to address these concerns, the rapid pace of technological advancement often outpaces regulatory frameworks. Ongoing efforts are crucial to adapt and strengthen privacy protections, involving collaboration between technology developers, policymakers, and users to ensure a digital landscape that respects and protects individuals' privacy rights.
+
+So yes technology and digital innovations do affect online privacy. and their influence is expected to grow even stronger in the future.
