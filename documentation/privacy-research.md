@@ -1,4 +1,4 @@
-# How do technology and digital innovations affect online privacy, and what measures achieve a balance between user-friendly services and preserving personal privacy?
+# How do technology, digital innovations affect online privacy?
 
 ## Sub-questions
 
