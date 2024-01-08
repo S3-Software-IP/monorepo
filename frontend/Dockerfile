@@ -10,6 +10,9 @@ WORKDIR /src/app
 # Copy package.json and package-lock.json to the working directory
 COPY package*.json ./
 
+# Debugging: List files in the directory
+RUN ls -al
+
 # Install dependencies
 RUN npm install --ignore-scripts
 
