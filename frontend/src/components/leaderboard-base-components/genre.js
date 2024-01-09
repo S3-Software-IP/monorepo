@@ -1,6 +1,6 @@
 import React from "react";
 
-const Genre = ({ index, genre }) => {
+const Genre = ({ genre }) => {
   return (
     <div className="p-2 w-full  mx-3" data-testid="genre">
       <div className="flex flex-row full items-center content-center">
