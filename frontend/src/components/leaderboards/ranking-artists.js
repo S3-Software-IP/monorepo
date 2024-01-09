@@ -10,7 +10,6 @@ export default function Top50Artists() {
       try {
         const apiData = (await getTop50Artists()).data;
         setArtists(apiData);
-        console.log("API Data:", apiData);
       } catch (error) {
         console.error("Error fetching Spotify data:", error);
       }
