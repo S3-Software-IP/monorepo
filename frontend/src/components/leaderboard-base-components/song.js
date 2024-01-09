@@ -4,7 +4,7 @@ import spotifyLogo from "@/static/img/spotifyGreen.svg";
 
 const Song = ({ index, title, artist, albumCoverURL, spotifySongURL }) => {
   return (
-    <div className="p-2 w-full  mx-3">
+    <div className="p-2 w-full  mx-3" data-testid="song">
       <div className="flex flex-row full items-center content-center">
         <div className="w-10 mx-2 my-0 text-right">{index}</div>{" "}
         <Image
