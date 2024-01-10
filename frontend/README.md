@@ -7,6 +7,7 @@ _Help me! I'm lost, take me to the [starting page](../README.md) please!_
 - [Frontend - Building with React and Next.js](#frontend---building-with-react-and-nextjs)
   - [Overview](#overview)
   - [Getting Started](#getting-started)
+  - [Tests](#tests)
   - [Learn More](#learn-more)
 
 ## Overview
@@ -55,6 +56,18 @@ To run the frontend locally, follow these steps:
 Please ensure you have the necessary packages and external software installed for
 a smooth experience.
 
+## Tests
+
+The frontend is tested using Jest. It's an integrated tool with a relatively low
+learning curve. To run already existing local tests:
+
+1. Navigate to the /frontend folder in a terminal.
+2. Use the following command to run and review the tests:
+
+   ```bash
+   npm run test
+   ```
+
 ## Learn More
 
 To learn more about React and Next.js, consider exploring the following resources:
@@ -62,3 +75,5 @@ To learn more about React and Next.js, consider exploring the following resource
 - [Next.js Documentation](https://nextjs.org/docs) - Learn about Next.js features
   and API.
 - [Learn Next.js](https://nextjs.org/learn) - An interactive Next.js tutorial.
+- [Jest NextJs](https://nextjs.org/docs/app/building-your-application/testing/jest) - Getting started with Jest and further reading provided by NextJS.
+- [Jest](https://jestjs.io/docs/getting-started) - Jest's documentation
