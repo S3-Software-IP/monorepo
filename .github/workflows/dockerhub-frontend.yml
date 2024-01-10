@@ -1,4 +1,4 @@
-name: DockerHub CI
+name: DockerHub Build and Push Frontend
 
 on:
   push:
