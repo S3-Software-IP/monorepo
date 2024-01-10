@@ -1,5 +1,15 @@
 import axios from "axios";
-const secrets = require("@/../secrets.json");
+let secrets;
+try {
+  secrets = require("@/../secrets.json");
+} catch (error) {
+  console.warn("Local secrets not found. Trying GitHub Secrets.");
+  secrets = {
+    CLIENT_ID: process.env.SPOTIFY_CLIENT_ID || process.env.GITHUB_SPOTIFY_CLIENT_ID,
+    CLIENT_SECRET: process.env.SPOTIFY_CLIENT_SECRET || process.env.GITHUB_SPOTIFY_CLIENT_SECRET,
+    REDIRECT_URI: process.env.SPOTIFY_REDIRECT_URI || process.env.GITHUB_SPOTIFY_REDIRECT_URI,
+  };
+}
 
 const SPOTIFY_TOKEN_ENDPOINT = "https://accounts.spotify.com/api/token";
 const SPOTIFY_API_ENDPOINT = "https://api.spotify.com/v1/me";
