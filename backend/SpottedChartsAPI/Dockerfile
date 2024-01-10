@@ -3,7 +3,6 @@ FROM mcr.microsoft.com/dotnet/aspnet:7.0 AS base
 WORKDIR /app
 EXPOSE 80
 EXPOSE 443
-USER nobody:nogroup  # Change this line based on the appropriate non-root user for your image
 
 FROM mcr.microsoft.com/dotnet/sdk:7.0 AS build
 WORKDIR /src
@@ -25,15 +24,6 @@ RUN dotnet publish "SpottedChartsAPI.csproj" -c Release -o /app/publish /p:UseAp
 
 FROM base AS final
 WORKDIR /app
-
-# Create a new user named "appuser"
-RUN adduser --disabled-password --gecos '' appuser
-
-# Change ownership of the app directory to the new user
-RUN chown -R appuser:appuser /app
-
-# Switch to the new user
-USER appuser
 
 # Explicitly copy only necessary files and directories
 COPY --from=publish /app/publish/SpottedChartsAPI.dll .
