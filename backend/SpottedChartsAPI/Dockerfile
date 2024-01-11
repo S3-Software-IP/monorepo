@@ -29,6 +29,14 @@ RUN dotnet publish "SpottedChartsAPI.csproj" -c Release -o /app/publish /p:UseAp
 FROM base AS final
 WORKDIR /app
 
+# Create a non-root user
+RUN addgroup --system --gid 1000 appuser && \
+    adduser --system --uid 1000 --ingroup appuser appuser && \
+    chown -R appuser:appuser /app
+
+# Switch to the non-root user
+USER appuser
+
 # Explicitly copy only necessary files and directories
 COPY --from=publish /app/publish/SpottedChartsAPI.dll .
 
