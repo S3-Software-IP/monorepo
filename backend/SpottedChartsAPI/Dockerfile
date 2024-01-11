@@ -4,6 +4,10 @@ WORKDIR /app
 EXPOSE 80
 EXPOSE 443
 
+# Create non-root user
+RUN addgroup -S nonroot && adduser -S nonroot -G nonroot
+USER nonroot
+
 FROM mcr.microsoft.com/dotnet/sdk:7.0 AS build
 WORKDIR /src
 COPY ["SpottedChartsAPI/SpottedChartsAPI.csproj", "SpottedChartsAPI/"]
