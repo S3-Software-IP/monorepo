@@ -6,10 +6,10 @@ import { useRouter } from "next/router";
 export default function Menu() {
   const router = useRouter();
   const removeSnapshots = async () => {
-    const bevestiging = window.confirm(
+    const confirm = window.confirm(
       "Are you sure you want to delete your data?"
     );
-    if (bevestiging) {
+    if (confirm) {
       const apiData = await DeleteAllSnapshots();
       router.push("/logout");
       return apiData;
