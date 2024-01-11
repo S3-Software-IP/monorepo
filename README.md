@@ -31,14 +31,14 @@ This diagram offers an overview of the application's
 structure and its interaction with external components,
 with the Spotify Web-API being the sole external component.
 
-<img src="../monorepo/documentation/diagrams-exported/C4-system-context.svg"
+<img src="documentation\diagrams-exported\C4-system-context.svg"
   alt="C4 system context diagram"
   style="border: 2px solid gray; border-radius: 20px; background-color: white;">
 
 In addition to the system context diagram, we've prepared a C4 container context
 diagram to provide a more detailed view of the application's internal components.
 
-<img src="../monorepo/documentation/diagrams-exported/C4-container-context.svg"
+<img src="documentation\diagrams-exported\C4-container-context.svg"
  alt="C4 container context diagram"
  style="border: 2px solid gray; border-radius: 20px; background-color: white;">
 
