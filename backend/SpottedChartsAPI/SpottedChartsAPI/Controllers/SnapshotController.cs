@@ -54,5 +54,33 @@ namespace SpottedChartsAPI.Controllers
 
             return BadRequest("The passed snapshot UUID was invalid, poorly structured, or empty.");
         }
+
+        [HttpDelete]
+        [Route("/snapshots/{spotifyUserId}")]
+        public async Task<IActionResult> DeleteAllBySpotifyUserId(string spotifyUserId)
+        {
+            if (string.IsNullOrEmpty(spotifyUserId))
+            {
+                return BadRequest("The passed Spotify user id was empty or invalid.");
+            }
+
+            var user = _userService.GetUser(spotifyUserId);
+
+            if (user == null)
+            {
+                return NotFound("This ID is not associated or registered.");
+            }
+
+            var snapshots = await _snapshotService.GetBySpotifyId(spotifyUserId);
+
+            if (snapshots == null)
+            {
+                return NotFound($"User '{spotifyUserId}' was not found.");
+            }
+
+            _snapshotService.DeleteAllBySpotifyUserId(spotifyUserId);
+
+            return Ok();
+        }    
     }
 }
