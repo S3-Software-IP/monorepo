@@ -28,6 +28,11 @@ jobs:
           cd frontend
           npm run build
 
+      - name: Run Jest tests
+        run: |
+          cd frontend
+          npm test
+
       - name: Build Docker image
         run: docker build -t ${{ secrets.DOCKER_USERNAME }}/spottedcharts:latest -f frontend/Dockerfile frontend
 
