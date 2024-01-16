@@ -9,4 +9,5 @@ public interface ISnapshotRepository
     public bool Delete(Guid id);
     public bool Update(SnapshotDTO snapshot);
     public bool Create(SnapshotDTO snapshot);
+    public bool DeleteAllByUserId(string userId);
 }

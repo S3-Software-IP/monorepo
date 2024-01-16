@@ -62,7 +62,13 @@ namespace SpottedChartsAPIDomain.Services
         public bool Create(SnapshotDTO snapshotDTO)
         {
             return _snapshotRepository.Create(snapshotDTO);
+        }
 
+        public bool DeleteAllBySpotifyUserId(string SpotifyUserId)
+        {
+            UserDTO user = _userService.GetUser(SpotifyUserId);
+
+            return _snapshotRepository.DeleteAllByUserId(user.Id.ToString());
         }
     }
 }

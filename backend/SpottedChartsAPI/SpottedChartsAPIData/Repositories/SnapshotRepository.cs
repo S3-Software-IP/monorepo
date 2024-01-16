@@ -116,5 +116,21 @@ namespace SpottedChartsAPIData.Repositories
             }
 
         }
+
+        public bool DeleteAllByUserId(string UserId)
+        {
+            try
+            {
+                var snapshotsToDelete = _dbcontext.Snapshots.Where(s => s.UserId == UserId);
+                _dbcontext.RemoveRange(snapshotsToDelete);
+                _dbcontext.SaveChanges();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+                return false;
+            }
+        }
     }
 }

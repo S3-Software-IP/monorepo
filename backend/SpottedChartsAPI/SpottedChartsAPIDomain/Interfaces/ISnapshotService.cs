@@ -8,4 +8,5 @@ public interface ISnapshotService
     SnapshotDTO GetById(Guid snapshotId);
     bool Delete(Guid id);
     bool Create(SnapshotDTO snapshotDTO);
+    bool DeleteAllBySpotifyUserId(string SpotifyUserId);
 }

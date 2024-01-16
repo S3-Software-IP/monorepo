@@ -13,3 +13,16 @@ export async function GetAllSnapshots() {
     throw error;
   }
 }
+
+export async function DeleteAllSnapshots() {
+  try {
+    const userId = localStorage.getItem("userId");
+    const response = await axios.delete(
+      `https://localhost:7065/snapshots/${userId}`
+    );
+    return response.data;
+  } catch (error) {
+    console.error("Error deleting snapshots:", error);
+    throw error;
+  }
+}
